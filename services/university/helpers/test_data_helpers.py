@@ -1,0 +1,48 @@
+from logger.logger import Logger
+from services.university.models.grade_schema import GradeRequestSchema
+from faker import Faker
+
+fake = Faker()
+
+
+class TestDataHelper:
+
+    @staticmethod
+    def create_multiple_grades(grade_admin, teacher_id, student_id, count=None):
+        """
+        Создает несколько случайных оценок для теста
+        """
+        if count is None:
+            count = fake.random_int(3, 6)
+
+        created_grades = []
+
+        for _ in range(count):
+            grade_value = fake.random_int(1, 5)
+            created_grade = grade_admin.create_grade(
+                GradeRequestSchema(
+                    teacher_id=teacher_id, student_id=student_id, grade=grade_value
+                )
+            )
+            created_grades.append(created_grade)
+            Logger.info(f"Создана оценка: {grade_value} (ID: {created_grade.id})")
+
+        Logger.info(f"Всего создано {count} оценок")
+        return created_grades
+
+    @staticmethod
+    def calculate_grades_stats(grades):
+        """
+        Рассчитывает статистику по списку оценок
+        """
+        if not grades:
+            return {"count": 0, "min": 0, "max": 0, "avg": 0}
+
+        grades_values = [g.grade for g in grades]
+
+        return {
+            "count": len(grades_values),
+            "min": min(grades_values),
+            "max": max(grades_values),
+            "avg": sum(grades_values) / len(grades_values),
+        }
