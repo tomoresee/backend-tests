@@ -1,3 +1,5 @@
+import random
+
 from faker import Faker
 
 from logger.logger import Logger
@@ -15,7 +17,7 @@ class TestTeacher:
 
         first_name = fake.first_name()
         last_name = fake.last_name()
-        subject = Subject.random()
+        subject = random.choice([s.value for s in Subject])
 
         created_teacher = university_admin.create_teacher(
             TeacherRequestSchema(

@@ -1,10 +1,12 @@
 from pydantic import BaseModel, Field
 
+from services.university.constants import GradeConstants
+
 
 class BaseGradeSchema(BaseModel):
     teacher_id: int = Field(gt=0)
     student_id: int = Field(gt=0)
-    grade: int = Field(ge=1, le=5)
+    grade: int = Field(ge=GradeConstants.MIN_GRADE, le=GradeConstants.MAX_GRADE)
 
 
 class GradeRequestSchema(BaseGradeSchema):

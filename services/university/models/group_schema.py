@@ -21,7 +21,3 @@ class Degree(StrEnum):
     BACHELOR = "Bachelor"
     MASTER = "Master"
     DOCTORATE = "Doctorate"
-
-    @classmethod
-    def random(cls):
-        return random.choice(list(cls))

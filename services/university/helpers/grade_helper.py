@@ -17,8 +17,8 @@ class GradeHelper(BaseClient):
         response = self.api_utils.get(self.GRADE_ENDPOINT, params=params)
         return response
 
-    def post_grade(self, data: dict = None, json: dict = None):
-        response = self.api_utils.post(self.GRADE_ENDPOINT, data=data, json=json)
+    def post_grade(self, data: dict = None):
+        response = self.api_utils.post(self.GRADE_ENDPOINT, data=data)
         return response
 
     def delete_grade(self, grade_id: int):

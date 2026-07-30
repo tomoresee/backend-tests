@@ -1,3 +1,5 @@
+import random
+
 import pytest
 
 from services.auth.auth_service import AuthService
@@ -71,7 +73,7 @@ def create_teacher(university_api_utils_admin):
 
     first_name = fake.first_name()
     last_name = fake.last_name()
-    subject = Subject.random()
+    subject = random.choice([s.value for s in Subject])
 
     teacher = university_admin.create_teacher(
         TeacherRequestSchema(
@@ -98,7 +100,7 @@ def create_student(university_api_utils_admin, create_group):
     first_name = fake.first_name()
     last_name = fake.last_name()
     email = fake.email()
-    degree = Degree.random()
+    degree = random.choice([d.value for d in Degree])
     phone = fake.numerify("+7##########")
     group_id = create_group.id
 

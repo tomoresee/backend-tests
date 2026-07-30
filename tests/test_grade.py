@@ -10,7 +10,7 @@ fake = Faker()
 
 class TestGrade:
     def test_create_grade(
-        self, university_api_utils_admin, create_teacher, create_student
+            self, university_api_utils_admin, create_teacher, create_student
     ):
         Logger.info("Шаг 1. Создание оценки")
 
@@ -35,7 +35,7 @@ class TestGrade:
         assert created_grade in grades, f"Оценка {created_grade} не найдена в списке"
 
     def test_get_grades_stats(
-        self, university_api_utils_admin, create_teacher, create_student
+            self, university_api_utils_admin, create_teacher, create_student
     ):
         """
         Проверяет, что эндпоинт статистики оценок возвращает корректные данные
@@ -79,18 +79,29 @@ class TestGrade:
 
         Logger.info("Шаг 4. Сравниваем статистику API с рассчитанной")
 
-        assert (
-            stats.count == calculated["count"]
-        ), f"Количество не совпадает: {stats.count} != {calculated['count']}"
-        assert (
-            stats.min == calculated["min"]
-        ), f"Min не совпадает: {stats.min} != {calculated['min']}"
-        assert (
-            stats.max == calculated["max"]
-        ), f"Max не совпадает: {stats.max} != {calculated['max']}"
-        assert round(stats.avg, 2) == round(
-            calculated["avg"], 2
-        ), f"Avg не совпадает: {stats.avg} != {calculated['avg']}"
+        expected = {
+            "count": calculated["count"],
+            "min": round(calculated["min"], 2),
+            "max": round(calculated["max"], 2),
+            "avg": round(calculated["avg"], 2)
+        }
+
+        actual = {
+            "count": stats.count,
+            "min": round(stats.min, 2),
+            "max": round(stats.max, 2),
+            "avg": round(stats.avg, 2)
+        }
+
+        assert actual == expected, (
+            f"Статистика не совпадает.\n"
+            f"Expected: {expected}\n"
+            f"Actual: {actual}\n"
+            f"Разница: count={actual['count'] - expected['count']}, "
+            f"min={actual['min'] - expected['min']}, "
+            f"max={actual['max'] - expected['max']}, "
+            f"avg={actual['avg'] - expected['avg']:.2f}"
+        )
 
         Logger.info(
             f"Статистика верна: count={stats.count}, min={stats.min}, "
@@ -98,7 +109,7 @@ class TestGrade:
         )
 
     def test_update_grade(
-        self, university_api_utils_admin, create_teacher, create_student
+            self, university_api_utils_admin, create_teacher, create_student
     ):
         Logger.info("Шаг 1. Создание оценки для обновления")
 
@@ -136,14 +147,14 @@ class TestGrade:
 
         assert updated_grade in grades, f"Оценка {updated_grade} не найдена в списке"
         assert (
-            updated_grade.id == created_grade.id
+                updated_grade.id == created_grade.id
         ), f"ID оценки изменился: {updated_grade.id} != {created_grade.id}"
         assert (
-            updated_grade.grade == updated_grade_value
+                updated_grade.grade == updated_grade_value
         ), f"Оценка не обновилась: {updated_grade.grade} != {updated_grade_value}"
 
     def test_delete_grade(
-        self, university_api_utils_admin, create_teacher, create_student
+            self, university_api_utils_admin, create_teacher, create_student
     ):
         Logger.info("Шаг 1. Создание оценки для удаления")
 
@@ -172,8 +183,8 @@ class TestGrade:
         grades = grade_admin.get_grades()
 
         assert (
-            deleted_grade.detail == "Grade deleted"
+                deleted_grade.detail == "Grade deleted"
         ), f"Неожиданный ответ при удалении оценки: {deleted_grade.detail}"
         assert (
-            created_grade not in grades
+                created_grade not in grades
         ), f"Оценка {created_grade} найдена в списке после удаления"

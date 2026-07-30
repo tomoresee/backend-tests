@@ -24,7 +24,3 @@ class Subject(StrEnum):
     HISTORY = "History"
     BIOLOGY = "Biology"
     GEOGRAPHY = "Geography"
-
-    @classmethod
-    def random(cls):
-        return random.choice(list(cls))
