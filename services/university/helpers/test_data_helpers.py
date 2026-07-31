@@ -1,5 +1,5 @@
 from logger.logger import Logger
-from services.university.constants import GradeConstants
+from services.university.constants import GradeConstants, GradeDefaultCountsConstants
 from services.university.models.grade_schema import GradeRequestSchema
 from faker import Faker
 
@@ -14,7 +14,8 @@ class TestDataHelper:
         Создает несколько случайных оценок для теста
         """
         if count is None:
-            count = fake.random_int(GradeConstants.DEFAULT_COUNT_MIN, GradeConstants.DEFAULT_COUNT_MAX)
+            count = fake.random_int(GradeDefaultCountsConstants.DEFAULT_COUNT_MIN,
+                                    GradeDefaultCountsConstants.DEFAULT_COUNT_MAX)
 
         created_grades = []
 

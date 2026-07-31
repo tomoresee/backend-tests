@@ -1,6 +1,7 @@
 from faker import Faker
 
 from logger.logger import Logger
+from services.university.constants import GradeConstants
 from services.university.helpers.test_data_helpers import TestDataHelper
 from services.university.models.grade_schema import GradeRequestSchema
 from services.university.university_service import UniversityService
@@ -17,7 +18,7 @@ class TestGrade:
         grade_admin = UniversityService(university_api_utils_admin)
         teacher_id = create_teacher.id
         student_id = create_student.id
-        grade = fake.random_int(1, 5)
+        grade = fake.random_int(GradeConstants.MIN_GRADE, GradeConstants.MAX_GRADE)
 
         created_grade = grade_admin.create_grade(
             GradeRequestSchema(
@@ -25,88 +26,11 @@ class TestGrade:
             )
         )
 
-        Logger.info(f"Создана оценка: {created_grade}")
-        Logger.info(f"ID созданной оценки: {created_grade.id}")
-
         Logger.info("Шаг 2. Проверяем что оценка действительно создана")
 
         grades = grade_admin.get_grades()
 
         assert created_grade in grades, f"Оценка {created_grade} не найдена в списке"
-
-    def test_get_grades_stats(
-            self, university_api_utils_admin, create_teacher, create_student
-    ):
-        """
-        Проверяет, что эндпоинт статистики оценок возвращает корректные данные
-        """
-        grade_admin = UniversityService(university_api_utils_admin)
-
-        Logger.info("Шаг 1. Создаем несколько оценок для теста")
-
-        teacher_id = create_teacher.id
-        student_id = create_student.id
-
-        created_grades = TestDataHelper.create_multiple_grades(
-            grade_admin=grade_admin,
-            teacher_id=teacher_id,
-            student_id=student_id,
-        )
-
-        Logger.info(f"Созданы оценки для статистики: {created_grades}")
-
-        Logger.info("Шаг 2. Получаем статистику от API")
-        stats = grade_admin.get_grades_stats(
-            teacher_id=teacher_id,
-            student_id=student_id,
-        )
-        Logger.info(
-            f"API статистика: count={stats.count}, min={stats.min}, max={stats.max}, avg={stats.avg:.2f}"
-        )
-
-        Logger.info("Шаг 3. Получаем все оценки и считаем статистику вручную")
-        all_grades = grade_admin.get_grades(
-            teacher_id=teacher_id,
-            student_id=student_id,
-        )
-
-        calculated = TestDataHelper.calculate_grades_stats(all_grades)
-
-        Logger.info(
-            f"Рассчитанная статистика: count={calculated['count']}, min={calculated['min']}, "
-            f"max={calculated['max']}, avg={calculated['avg']:.2f}"
-        )
-
-        Logger.info("Шаг 4. Сравниваем статистику API с рассчитанной")
-
-        expected = {
-            "count": calculated["count"],
-            "min": round(calculated["min"], 2),
-            "max": round(calculated["max"], 2),
-            "avg": round(calculated["avg"], 2)
-        }
-
-        actual = {
-            "count": stats.count,
-            "min": round(stats.min, 2),
-            "max": round(stats.max, 2),
-            "avg": round(stats.avg, 2)
-        }
-
-        assert actual == expected, (
-            f"Статистика не совпадает.\n"
-            f"Expected: {expected}\n"
-            f"Actual: {actual}\n"
-            f"Разница: count={actual['count'] - expected['count']}, "
-            f"min={actual['min'] - expected['min']}, "
-            f"max={actual['max'] - expected['max']}, "
-            f"avg={actual['avg'] - expected['avg']:.2f}"
-        )
-
-        Logger.info(
-            f"Статистика верна: count={stats.count}, min={stats.min}, "
-            f"max={stats.max}, avg={stats.avg:.2f}"
-        )
 
     def test_update_grade(
             self, university_api_utils_admin, create_teacher, create_student
@@ -124,9 +48,6 @@ class TestGrade:
             )
         )
 
-        Logger.info(f"Создана оценка для обновления: {created_grade}")
-        Logger.info(f"ID созданной оценки: {created_grade.id}")
-
         Logger.info("Шаг 2. Обновление оценки")
 
         updated_grade_value = grade + 1 if grade < 5 else grade - 1
@@ -138,8 +59,6 @@ class TestGrade:
                 grade=updated_grade_value,
             ),
         )
-
-        Logger.info(f"Обновленная оценка: {updated_grade}")
 
         Logger.info("Шаг 3. Проверяем что оценка действительно обновлена")
 
@@ -169,14 +88,9 @@ class TestGrade:
             )
         )
 
-        Logger.info(f"Создана оценка для удаления: {created_grade}")
-        Logger.info(f"ID созданной оценки: {created_grade.id}")
-
         Logger.info("Шаг 2. Удаление оценки")
 
         deleted_grade = grade_admin.delete_grade(grade_id=created_grade.id)
-
-        Logger.info(f"Ответ API при удалении оценки: {deleted_grade}")
 
         Logger.info("Шаг 3. Проверяем что оценка действительно удалена")
 
@@ -188,3 +102,343 @@ class TestGrade:
         assert (
                 created_grade not in grades
         ), f"Оценка {created_grade} найдена в списке после удаления"
+
+    def test_get_grades_stats(
+            self, university_api_utils_admin, create_teacher, create_student
+    ):
+        """
+        Проверяет, что эндпоинт статистики оценок возвращает корректные данные
+        """
+        grade_admin = UniversityService(university_api_utils_admin)
+
+        Logger.info("Шаг 1. Создаем несколько оценок для теста")
+
+        teacher_id = create_teacher.id
+        student_id = create_student.id
+
+        created_grades = TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=teacher_id,
+            student_id=student_id,
+        )
+
+        Logger.info("Шаг 2. Получаем статистику от API")
+        stats = grade_admin.get_grades_stats(
+            teacher_id=teacher_id,
+            student_id=student_id,
+        )
+
+        Logger.info("Шаг 3. Получаем все оценки и считаем статистику вручную")
+        all_grades = grade_admin.get_grades(
+            teacher_id=teacher_id,
+            student_id=student_id,
+        )
+
+        calculated = TestDataHelper.calculate_grades_stats(all_grades)
+
+        Logger.info("Шаг 4. Сравниваем статистику API с рассчитанной")
+
+        expected = {
+            "count": calculated["count"],
+            "min": round(calculated["min"]) if calculated["min"] is not None else None,
+            "max": round(calculated["max"]) if calculated["max"] is not None else None,
+            "avg": round(calculated["avg"], 2) if calculated["avg"] is not None else None
+        }
+
+        actual = {
+            "count": stats.count,
+            "min": stats.min,
+            "max": stats.max,
+            "avg": stats.avg
+        }
+
+        assert actual == expected, (
+            f"Статистика не совпадает.\n"
+            f"Expected: {expected}\n"
+            f"Actual: {actual}\n"
+            f"Разница: count={actual['count'] - expected['count']}, "
+            f"min={actual['min'] - expected['min']}, "
+            f"max={actual['max'] - expected['max']}, "
+            f"avg={actual['avg'] - expected['avg']:.2f}"
+        )
+
+    def test_get_grades_stats_without_params(self, university_api_utils_admin):
+        """
+        Проверяет, что эндпоинт статистики работает без параметров
+        Ожидаем: возвращает статистику по всем оценкам
+        """
+        grade_admin = UniversityService(university_api_utils_admin)
+
+        all_grades = grade_admin.get_grades()
+
+        stats = grade_admin.get_grades_stats()
+
+        expected = TestDataHelper.calculate_grades_stats(all_grades)
+
+        assert stats.count == expected["count"], (
+            f"Count не совпадает.\n"
+            f"Expected: {expected['count']}\n"
+            f"Actual: {stats.count}"
+        )
+
+        assert stats.min == expected["min"], (
+            f"Min не совпадает.\n"
+            f"Expected: {expected['min']}\n"
+            f"Actual: {stats.min}"
+        )
+
+        assert stats.max == expected["max"], (
+            f"Max не совпадает.\n"
+            f"Expected: {expected['max']}\n"
+            f"Actual: {stats.max}"
+        )
+
+        actual_avg = round(stats.avg, 2)
+        expected_avg = round(expected["avg"], 2)
+        assert actual_avg == expected_avg, (
+            f"Average не совпадает.\n"
+            f"Expected: {expected_avg}\n"
+            f"Actual: {actual_avg}\n"
+            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+        )
+
+    def test_get_grades_stats_with_teacher_id_only(
+            self, university_api_utils_admin, create_teacher, create_student
+    ):
+        """
+        Проверяет фильтрацию статистики только по teacher_id
+        Ожидаем: статистика только для оценок этого учителя
+        """
+        grade_admin = UniversityService(university_api_utils_admin)
+        teacher_id = create_teacher.id
+        student_id = create_student.id
+
+        created_grades = TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=teacher_id,
+            student_id=student_id,
+            count=5
+        )
+
+        stats = grade_admin.get_grades_stats(teacher_id=teacher_id)
+
+        all_grades = grade_admin.get_grades(teacher_id=teacher_id)
+        expected = TestDataHelper.calculate_grades_stats(all_grades)
+
+        actual_teacher_ids = [g.teacher_id for g in all_grades]
+        assert all(t == teacher_id for t in actual_teacher_ids), (
+            f"Найдены оценки других учителей.\n"
+            f"Expected teacher_id: {teacher_id}\n"
+            f"Actual teacher_ids: {set(actual_teacher_ids)}"
+        )
+
+        assert stats.count == expected["count"], (
+            f"Count не совпадает.\n"
+            f"Expected: {expected['count']}\n"
+            f"Actual: {stats.count}"
+        )
+
+        assert stats.min == expected["min"], (
+            f"Min не совпадает.\n"
+            f"Expected: {expected['min']}\n"
+            f"Actual: {stats.min}"
+        )
+
+        assert stats.max == expected["max"], (
+            f"Max не совпадает.\n"
+            f"Expected: {expected['max']}\n"
+            f"Actual: {stats.max}"
+        )
+
+        actual_avg = round(stats.avg, 2)
+        expected_avg = round(expected["avg"], 2)
+        assert actual_avg == expected_avg, (
+            f"Average не совпадает.\n"
+            f"Expected: {expected_avg}\n"
+            f"Actual: {actual_avg}\n"
+            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+        )
+
+    def test_get_grades_stats_with_student_id_only(
+            self, university_api_utils_admin, create_teacher, create_student
+    ):
+        """
+        Проверяет фильтрацию статистики только по student_id
+        Ожидаем: статистика только для оценок этого студента
+        """
+        grade_admin = UniversityService(university_api_utils_admin)
+        teacher_id = create_teacher.id
+        student_id = create_student.id
+
+        created_grades = TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=teacher_id,
+            student_id=student_id,
+            count=5
+        )
+
+        stats = grade_admin.get_grades_stats(student_id=student_id)
+
+        all_grades = grade_admin.get_grades(student_id=student_id)
+        expected = TestDataHelper.calculate_grades_stats(all_grades)
+
+        actual_student_ids = [g.student_id for g in all_grades]
+        assert all(s == student_id for s in actual_student_ids), (
+            f"Найдены оценки других студентов.\n"
+            f"Expected student_id: {student_id}\n"
+            f"Actual student_ids: {set(actual_student_ids)}"
+        )
+
+        assert stats.count == expected["count"], (
+            f"Count не совпадает.\n"
+            f"Expected: {expected['count']}\n"
+            f"Actual: {stats.count}"
+        )
+
+        assert stats.min == expected["min"], (
+            f"Min не совпадает.\n"
+            f"Expected: {expected['min']}\n"
+            f"Actual: {stats.min}"
+        )
+
+        assert stats.max == expected["max"], (
+            f"Max не совпадает.\n"
+            f"Expected: {expected['max']}\n"
+            f"Actual: {stats.max}"
+        )
+
+        actual_avg = round(stats.avg, 2)
+        expected_avg = round(expected["avg"], 2)
+        assert actual_avg == expected_avg, (
+            f"Average не совпадает.\n"
+            f"Expected: {expected_avg}\n"
+            f"Actual: {actual_avg}\n"
+            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+        )
+
+    def test_get_grades_stats_with_group_id_only(
+            self, university_api_utils_admin, create_teacher, create_student, create_group
+    ):
+        """
+        Проверяет фильтрацию статистики только по group_id
+        Ожидаем: статистика только для оценок студентов из этой группы
+        """
+        grade_admin = UniversityService(university_api_utils_admin)
+        teacher_id = create_teacher.id
+        student_id = create_student.id
+        group_id = create_group.id
+
+        created_grades = TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=teacher_id,
+            student_id=student_id,
+            count=5
+        )
+
+        stats = grade_admin.get_grades_stats(group_id=group_id)
+        all_grades = grade_admin.get_grades(group_id=group_id)
+        expected = TestDataHelper.calculate_grades_stats(all_grades)
+
+        actual_student_ids = [g.student_id for g in all_grades]
+        assert all(s == student_id for s in actual_student_ids), (
+            f"Найдены оценки студентов не из этой группы.\n"
+            f"Expected student_id: {student_id}\n"
+            f"Actual student_ids: {set(actual_student_ids)}"
+        )
+
+        assert stats.count == expected["count"], (
+            f"Count не совпадает.\n"
+            f"Expected: {expected['count']}\n"
+            f"Actual: {stats.count}"
+        )
+
+        assert stats.min == expected["min"], (
+            f"Min не совпадает.\n"
+            f"Expected: {expected['min']}\n"
+            f"Actual: {stats.min}"
+        )
+
+        assert stats.max == expected["max"], (
+            f"Max не совпадает.\n"
+            f"Expected: {expected['max']}\n"
+            f"Actual: {stats.max}"
+        )
+
+        actual_avg = round(stats.avg, 2)
+        expected_avg = round(expected["avg"], 2)
+        assert actual_avg == expected_avg, (
+            f"Average не совпадает.\n"
+            f"Expected: {expected_avg}\n"
+            f"Actual: {actual_avg}\n"
+            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+        )
+
+    def test_get_grades_stats_with_teacher_id_and_student_id_params(
+            self, university_api_utils_admin, create_teacher, create_student
+    ):
+        """
+        Проверяет фильтрацию статистики по teacher_id и student_id одновременно
+        Ожидаем: статистика только для оценок этого учителя у этого студента
+        """
+        grade_admin = UniversityService(university_api_utils_admin)
+        teacher_id = create_teacher.id
+        student_id = create_student.id
+
+        created_grades = TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=teacher_id,
+            student_id=student_id,
+            count=5
+        )
+
+        stats = grade_admin.get_grades_stats(
+            teacher_id=teacher_id,
+            student_id=student_id
+        )
+
+        all_grades = grade_admin.get_grades(
+            teacher_id=teacher_id,
+            student_id=student_id
+        )
+        expected = TestDataHelper.calculate_grades_stats(all_grades)
+
+        actual_teacher_ids = [g.teacher_id for g in all_grades]
+        assert all(t == teacher_id for t in actual_teacher_ids), (
+            f"Найдены оценки других учителей.\n"
+            f"Expected teacher_id: {teacher_id}\n"
+            f"Actual teacher_ids: {set(actual_teacher_ids)}"
+        )
+
+        actual_student_ids = [g.student_id for g in all_grades]
+        assert all(s == student_id for s in actual_student_ids), (
+            f"Найдены оценки других студентов.\n"
+            f"Expected student_id: {student_id}\n"
+            f"Actual student_ids: {set(actual_student_ids)}"
+        )
+
+        assert stats.count == expected["count"], (
+            f"Count не совпадает.\n"
+            f"Expected: {expected['count']}\n"
+            f"Actual: {stats.count}"
+        )
+
+        assert stats.min == expected["min"], (
+            f"Min не совпадает.\n"
+            f"Expected: {expected['min']}\n"
+            f"Actual: {stats.min}"
+        )
+
+        assert stats.max == expected["max"], (
+            f"Max не совпадает.\n"
+            f"Expected: {expected['max']}\n"
+            f"Actual: {stats.max}"
+        )
+
+        actual_avg = round(stats.avg, 2)
+        expected_avg = round(expected["avg"], 2)
+        assert actual_avg == expected_avg, (
+            f"Average не совпадает.\n"
+            f"Expected: {expected_avg}\n"
+            f"Actual: {actual_avg}\n"
+            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+        )
