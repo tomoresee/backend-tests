@@ -1,6 +1,6 @@
 from logger.logger import Logger
 from services.university.constants import GradeConstants, GradeDefaultCountsConstants
-from services.university.models.grade_schema import GradeRequestSchema
+from services.university.models.grade_schema import GradeRequestSchema, GradeStatisticResponseSchema
 from faker import Faker
 
 fake = Faker()
@@ -38,13 +38,18 @@ class TestDataHelper:
         Рассчитывает статистику по списку оценок
         """
         if not grades:
-            return {"count": 0, "min": 0, "max": 0, "avg": 0}
+            return GradeStatisticResponseSchema(
+                count=0,
+                min=None,
+                max=None,
+                avg=None
+            )
 
         grades_values = [g.grade for g in grades]
 
-        return {
-            "count": len(grades_values),
-            "min": min(grades_values),
-            "max": max(grades_values),
-            "avg": sum(grades_values) / len(grades_values),
-        }
+        return GradeStatisticResponseSchema(
+            count=len(grades_values),
+            min=min(grades_values),
+            max=max(grades_values),
+            avg=sum(grades_values) / len(grades_values)
+        )

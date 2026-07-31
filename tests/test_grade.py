@@ -3,7 +3,7 @@ from faker import Faker
 from logger.logger import Logger
 from services.university.constants import GradeConstants
 from services.university.helpers.test_data_helpers import TestDataHelper
-from services.university.models.grade_schema import GradeRequestSchema
+from services.university.models.grade_schema import GradeRequestSchema, GradeStatisticResponseSchema
 from services.university.university_service import UniversityService
 
 fake = Faker()
@@ -138,28 +138,24 @@ class TestGrade:
 
         Logger.info("Шаг 4. Сравниваем статистику API с рассчитанной")
 
-        expected = {
-            "count": calculated["count"],
-            "min": round(calculated["min"]) if calculated["min"] is not None else None,
-            "max": round(calculated["max"]) if calculated["max"] is not None else None,
-            "avg": round(calculated["avg"], 2) if calculated["avg"] is not None else None
-        }
+        expected = GradeStatisticResponseSchema(
+            count=calculated.count,
+            min=round(calculated.min) if calculated.min is not None else None,
+            max=round(calculated.max) if calculated.max is not None else None,
+            avg=round(calculated.avg, 2) if calculated.avg is not None else None
+        )
 
-        actual = {
-            "count": stats.count,
-            "min": stats.min,
-            "max": stats.max,
-            "avg": stats.avg
-        }
+        actual = GradeStatisticResponseSchema(
+            count=stats.count,
+            min=stats.min,
+            max=stats.max,
+            avg=round(stats.avg, 2) if stats.avg is not None else None
+        )
 
         assert actual == expected, (
             f"Статистика не совпадает.\n"
             f"Expected: {expected}\n"
-            f"Actual: {actual}\n"
-            f"Разница: count={actual['count'] - expected['count']}, "
-            f"min={actual['min'] - expected['min']}, "
-            f"max={actual['max'] - expected['max']}, "
-            f"avg={actual['avg'] - expected['avg']:.2f}"
+            f"Actual: {actual}"
         )
 
     def test_get_grades_stats_without_params(self, university_api_utils_admin):
@@ -175,31 +171,31 @@ class TestGrade:
 
         expected = TestDataHelper.calculate_grades_stats(all_grades)
 
-        assert stats.count == expected["count"], (
+        assert stats.count == expected.count, (
             f"Count не совпадает.\n"
-            f"Expected: {expected['count']}\n"
+            f"Expected: {expected.count}\n"
             f"Actual: {stats.count}"
         )
 
-        assert stats.min == expected["min"], (
+        assert stats.min == expected.min, (
             f"Min не совпадает.\n"
-            f"Expected: {expected['min']}\n"
+            f"Expected: {expected.min}\n"
             f"Actual: {stats.min}"
         )
 
-        assert stats.max == expected["max"], (
+        assert stats.max == expected.max, (
             f"Max не совпадает.\n"
-            f"Expected: {expected['max']}\n"
+            f"Expected: {expected.max}\n"
             f"Actual: {stats.max}"
         )
 
         actual_avg = round(stats.avg, 2)
-        expected_avg = round(expected["avg"], 2)
+        expected_avg = round(expected.avg, 2)
         assert actual_avg == expected_avg, (
             f"Average не совпадает.\n"
             f"Expected: {expected_avg}\n"
             f"Actual: {actual_avg}\n"
-            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+            f"Raw values - Expected: {expected.avg}, Actual: {stats.avg}"
         )
 
     def test_get_grades_stats_with_teacher_id_only(
@@ -232,31 +228,31 @@ class TestGrade:
             f"Actual teacher_ids: {set(actual_teacher_ids)}"
         )
 
-        assert stats.count == expected["count"], (
+        assert stats.count == expected.count, (
             f"Count не совпадает.\n"
-            f"Expected: {expected['count']}\n"
+            f"Expected: {expected.count}\n"
             f"Actual: {stats.count}"
         )
 
-        assert stats.min == expected["min"], (
+        assert stats.min == expected.min, (
             f"Min не совпадает.\n"
-            f"Expected: {expected['min']}\n"
+            f"Expected: {expected.min}\n"
             f"Actual: {stats.min}"
         )
 
-        assert stats.max == expected["max"], (
+        assert stats.max == expected.max, (
             f"Max не совпадает.\n"
-            f"Expected: {expected['max']}\n"
+            f"Expected: {expected.max}\n"
             f"Actual: {stats.max}"
         )
 
         actual_avg = round(stats.avg, 2)
-        expected_avg = round(expected["avg"], 2)
+        expected_avg = round(expected.avg, 2)
         assert actual_avg == expected_avg, (
             f"Average не совпадает.\n"
             f"Expected: {expected_avg}\n"
             f"Actual: {actual_avg}\n"
-            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+            f"Raw values - Expected: {expected.avg}, Actual: {stats.avg}"
         )
 
     def test_get_grades_stats_with_student_id_only(
@@ -289,31 +285,31 @@ class TestGrade:
             f"Actual student_ids: {set(actual_student_ids)}"
         )
 
-        assert stats.count == expected["count"], (
+        assert stats.count == expected.count, (
             f"Count не совпадает.\n"
-            f"Expected: {expected['count']}\n"
+            f"Expected: {expected.count}\n"
             f"Actual: {stats.count}"
         )
 
-        assert stats.min == expected["min"], (
+        assert stats.min == expected.min, (
             f"Min не совпадает.\n"
-            f"Expected: {expected['min']}\n"
+            f"Expected: {expected.min}\n"
             f"Actual: {stats.min}"
         )
 
-        assert stats.max == expected["max"], (
+        assert stats.max == expected.max, (
             f"Max не совпадает.\n"
-            f"Expected: {expected['max']}\n"
+            f"Expected: {expected.max}\n"
             f"Actual: {stats.max}"
         )
 
         actual_avg = round(stats.avg, 2)
-        expected_avg = round(expected["avg"], 2)
+        expected_avg = round(expected.avg, 2)
         assert actual_avg == expected_avg, (
             f"Average не совпадает.\n"
             f"Expected: {expected_avg}\n"
             f"Actual: {actual_avg}\n"
-            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+            f"Raw values - Expected: {expected.avg}, Actual: {stats.avg}"
         )
 
     def test_get_grades_stats_with_group_id_only(
@@ -346,31 +342,31 @@ class TestGrade:
             f"Actual student_ids: {set(actual_student_ids)}"
         )
 
-        assert stats.count == expected["count"], (
+        assert stats.count == expected.count, (
             f"Count не совпадает.\n"
-            f"Expected: {expected['count']}\n"
+            f"Expected: {expected.count}\n"
             f"Actual: {stats.count}"
         )
 
-        assert stats.min == expected["min"], (
+        assert stats.min == expected.min, (
             f"Min не совпадает.\n"
-            f"Expected: {expected['min']}\n"
+            f"Expected: {expected.min}\n"
             f"Actual: {stats.min}"
         )
 
-        assert stats.max == expected["max"], (
+        assert stats.max == expected.max, (
             f"Max не совпадает.\n"
-            f"Expected: {expected['max']}\n"
+            f"Expected: {expected.max}\n"
             f"Actual: {stats.max}"
         )
 
         actual_avg = round(stats.avg, 2)
-        expected_avg = round(expected["avg"], 2)
+        expected_avg = round(expected.avg, 2)
         assert actual_avg == expected_avg, (
             f"Average не совпадает.\n"
             f"Expected: {expected_avg}\n"
             f"Actual: {actual_avg}\n"
-            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+            f"Raw values - Expected: {expected.avg}, Actual: {stats.avg}"
         )
 
     def test_get_grades_stats_with_teacher_id_and_student_id_params(
@@ -416,29 +412,29 @@ class TestGrade:
             f"Actual student_ids: {set(actual_student_ids)}"
         )
 
-        assert stats.count == expected["count"], (
+        assert stats.count == expected.count, (
             f"Count не совпадает.\n"
-            f"Expected: {expected['count']}\n"
+            f"Expected: {expected.count}\n"
             f"Actual: {stats.count}"
         )
 
-        assert stats.min == expected["min"], (
+        assert stats.min == expected.min, (
             f"Min не совпадает.\n"
-            f"Expected: {expected['min']}\n"
+            f"Expected: {expected.min}\n"
             f"Actual: {stats.min}"
         )
 
-        assert stats.max == expected["max"], (
+        assert stats.max == expected.max, (
             f"Max не совпадает.\n"
-            f"Expected: {expected['max']}\n"
+            f"Expected: {expected.max}\n"
             f"Actual: {stats.max}"
         )
 
         actual_avg = round(stats.avg, 2)
-        expected_avg = round(expected["avg"], 2)
+        expected_avg = round(expected.avg, 2)
         assert actual_avg == expected_avg, (
             f"Average не совпадает.\n"
             f"Expected: {expected_avg}\n"
             f"Actual: {actual_avg}\n"
-            f"Raw values - Expected: {expected['avg']}, Actual: {stats.avg}"
+            f"Raw values - Expected: {expected.avg}, Actual: {stats.avg}"
         )
