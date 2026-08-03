@@ -8,8 +8,8 @@ class StudentHelper(BaseClient):
         response = self.api_utils.get(self.STUDENT_ENDPOINT)
         return response
 
-    def post_student(self, data: dict = None, json: dict = None):
-        response = self.api_utils.post(self.STUDENT_ENDPOINT, data=data, json=json)
+    def post_student(self, json: dict):
+        response = self.api_utils.post(self.STUDENT_ENDPOINT, json=json)
         return response
 
     def get_student_by_id(self, student_id: int):

@@ -23,6 +23,6 @@ class GradeDeleteResponseSchema(BaseModel):
 
 class GradeStatisticResponseSchema(BaseModel):
     count: int
-    min: int
-    max: int
+    min: int = Field(gt=GradeConstants.MIN_GRADE, description="Минимальная оценка")
+    max: int = Field(le=GradeConstants.MAX_GRADE, description="Максимальная оценка")
     avg: float

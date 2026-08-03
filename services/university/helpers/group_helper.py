@@ -8,8 +8,8 @@ class GroupHelper(BaseClient):
         response = self.api_utils.get(self.GROUP_ENDPOINT)
         return response
 
-    def post_group(self, data: dict = None, json: dict = None):
-        response = self.api_utils.post(self.GROUP_ENDPOINT, data=data, json=json)
+    def post_group(self, json: dict = None):
+        response = self.api_utils.post(self.GROUP_ENDPOINT, json=json)
         return response
 
     def get_group_by_id(self, group_id: int):
