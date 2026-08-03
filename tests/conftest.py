@@ -5,6 +5,8 @@ import pytest
 from services.auth.auth_service import AuthService
 from services.auth.models.login_schema import LoginRequestsSchema
 from services.auth.models.register_schema import RegisterRequestSchema
+from services.university.constants import GradeConstants
+from services.university.models.grade_schema import GradeRequestSchema
 from services.university.models.group_schema import GroupRequestSchema, Degree
 from services.university.models.student_schema import StudentRequestSchema
 from services.university.models.teachers_schema import TeacherRequestSchema, Subject
@@ -116,3 +118,25 @@ def create_student(university_api_utils_admin, create_group):
     )
 
     return student
+
+
+@pytest.fixture(scope="function", autouse=False)
+def create_grade(university_api_utils_admin, create_teacher, create_student, create_group):
+    university_admin = UniversityService(university_api_utils_admin)
+
+    teacher_id = create_teacher.id
+    student_id = create_student.id
+    grade = fake.random_int(GradeConstants.MIN_GRADE, GradeConstants.MAX_GRADE)
+
+    created_grade = university_admin.create_grade(
+        GradeRequestSchema(
+            teacher_id=teacher_id, student_id=student_id, grade=grade
+        )
+    )
+
+    return {
+        "grade": grade,
+        "grade_id": created_grade.id,
+        "teacher_id": teacher_id,
+        "student_id": student_id
+    }
