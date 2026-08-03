@@ -140,3 +140,44 @@ def create_grade(university_api_utils_admin, create_teacher, create_student, cre
         "teacher_id": teacher_id,
         "student_id": student_id
     }
+
+
+@pytest.fixture(scope="function", autouse=False)
+def student_factory(university_api_utils_admin):
+    """Фабрика для создания произвольного количества студентов."""
+    created_students = []
+
+    def _create_student(group_id=None, **overrides):
+        defaults = {
+            "first_name": fake.first_name(),
+            "last_name": fake.last_name(),
+            "email": fake.email(),
+            "degree": random.choice([d.value for d in Degree]),
+            "phone": fake.numerify("+7##########"),
+        }
+        if group_id is not None:
+            defaults["group_id"] = group_id
+
+        defaults.update(overrides)
+
+        grade_admin = UniversityService(university_api_utils_admin)
+        student = grade_admin.create_student(StudentRequestSchema(**defaults))
+        created_students.append(student)
+        return student
+
+    yield _create_student
+
+
+@pytest.fixture
+def group_factory(university_api_utils_admin):
+    created_groups = []
+
+    def _create_group(**overrides):
+        defaults = {"name": fake.name()}
+        defaults.update(overrides)
+        grade_admin = UniversityService(university_api_utils_admin)
+        group = grade_admin.create_group(GroupRequestSchema(**defaults))
+        created_groups.append(group)
+        return group
+
+    yield _create_group
