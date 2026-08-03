@@ -1,9 +1,14 @@
+import random
+
 from faker import Faker
 
 from logger.logger import Logger
 from services.university.constants import GradeConstants
 from services.university.helpers.test_data_helpers import TestDataHelper
 from services.university.models.grade_schema import GradeRequestSchema, GradeStatisticResponseSchema
+from services.university.models.group_schema import GroupRequestSchema, Degree
+from services.university.models.student_schema import StudentRequestSchema
+from services.university.models.teachers_schema import Subject, TeacherRequestSchema
 from services.university.university_service import UniversityService
 
 fake = Faker()
@@ -123,10 +128,6 @@ class TestGrade:
                 grade not in grades
         ), f"Оценка {grade} найдена в списке после удаления"
 
-    # ==========================================================
-    # ========== ТЕСТЫ НА ПОЛУЧЕНИЕ СТАТИСТИКИ ОЦЕНОК ==========
-    # ==========================================================
-
     def test_get_grades_stats(self, university_api_utils_admin, create_teacher, create_student):
         """
         Проверяет, что эндпоинт статистики оценок возвращает корректные данные
@@ -138,7 +139,7 @@ class TestGrade:
         teacher_id = create_teacher.id
         student_id = create_student.id
 
-        created_grades = TestDataHelper.create_multiple_grades(
+        TestDataHelper.create_multiple_grades(
             grade_admin=grade_admin,
             teacher_id=teacher_id,
             student_id=student_id,
@@ -210,237 +211,181 @@ class TestGrade:
             f"Actual: {actual}\n"
         )
 
-    def test_get_grades_stats_with_teacher_id_only(self, university_api_utils_admin, create_teacher, create_student):
-        """
-        Проверяет фильтрацию статистики только по teacher_id
-        Ожидаем: статистика только для оценок этого учителя
-        """
+    def test_get_grades_stats_with_teacher_id_only(self, university_api_utils_admin, create_teacher,
+                                                   create_student):
         grade_admin = UniversityService(university_api_utils_admin)
-        teacher_id = create_teacher.id
+
+        # 1. Создаем ЦЕЛЕВОГО учителя и его оценки
+        target_teacher_id = create_teacher.id
         student_id = create_student.id
 
-        created_grades = TestDataHelper.create_multiple_grades(
+        target_grades = TestDataHelper.create_multiple_grades(
             grade_admin=grade_admin,
-            teacher_id=teacher_id,
+            teacher_id=target_teacher_id,
             student_id=student_id,
             count=5
         )
 
-        stats = grade_admin.get_grades_stats(teacher_id=teacher_id)
+        # 2. Создаем ВТОРОГО учителя и его оценки
 
-        all_grades = grade_admin.get_grades(teacher_id=teacher_id)
-        expected = TestDataHelper.calculate_grades_stats(all_grades)
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        subject = Subject.MATHEMATICS
 
-        actual_teacher_ids = [g.teacher_id for g in all_grades]
-        assert all(t == teacher_id for t in actual_teacher_ids), (
-            f"Найдены оценки других учителей.\n"
-            f"Expected teacher_id: {teacher_id}\n"
-            f"Actual teacher_ids: {set(actual_teacher_ids)}"
+        second_teacher = grade_admin.create_teacher(
+            TeacherRequestSchema(first_name=first_name, last_name=last_name, subject=subject))
+
+        TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=second_teacher.id,
+            student_id=student_id,
+            count=3
         )
 
-        assert stats.count == expected.count, (
-            f"Count не совпадает.\n"
-            f"Expected: {expected.count}\n"
-            f"Actual: {stats.count}"
+        # 3. Выполняем действие
+        stats = grade_admin.get_grades_stats(teacher_id=target_teacher_id)
+
+        # 4. Проверки
+        expected_stats = TestDataHelper.calculate_grades_stats(target_grades)
+
+        assert stats == expected_stats, (
+            f"Статистика не совпадает.\n"
+            f"Expected: {expected_stats}\n"
+            f"Actual: {stats}"
         )
 
-        assert stats.min == expected.min, (
-            f"Min не совпадает.\n"
-            f"Expected: {expected.min}\n"
-            f"Actual: {stats.min}"
-        )
-
-        assert stats.max == expected.max, (
-            f"Max не совпадает.\n"
-            f"Expected: {expected.max}\n"
-            f"Actual: {stats.max}"
-        )
-
-        actual_avg = round(stats.avg, 2)
-        expected_avg = round(expected.avg, 2)
-        assert actual_avg == expected_avg, (
-            f"Average не совпадает.\n"
-            f"Expected: {expected_avg}\n"
-            f"Actual: {actual_avg}\n"
-            f"Raw values - Expected: {expected.avg}, Actual: {stats.avg}"
-        )
-
-    def test_get_grades_stats_with_student_id_only(self, university_api_utils_admin, create_teacher, create_student):
-        """
-        Проверяет фильтрацию статистики только по student_id
-        Ожидаем: статистика только для оценок этого студента
-        """
+    def test_get_grades_stats_with_student_id_only(self, university_api_utils_admin, create_teacher, create_student,
+                                                   student_factory, group_factory):
         grade_admin = UniversityService(university_api_utils_admin)
         teacher_id = create_teacher.id
-        student_id = create_student.id
 
-        created_grades = TestDataHelper.create_multiple_grades(
+        # 1. Целевой студент и его оценки
+        target_student_id = create_student.id
+
+        target_grades = TestDataHelper.create_multiple_grades(
             grade_admin=grade_admin,
             teacher_id=teacher_id,
-            student_id=student_id,
+            student_id=target_student_id,
             count=5
         )
 
-        stats = grade_admin.get_grades_stats(student_id=student_id)
+        # 2. ДРУГОЙ студент с оценками от того же учителя
+        group = group_factory()
+        other_student = student_factory(group_id=group.id)
 
-        all_grades = grade_admin.get_grades(student_id=student_id)
-        expected = TestDataHelper.calculate_grades_stats(all_grades)
-
-        actual_student_ids = [g.student_id for g in all_grades]
-        assert all(s == student_id for s in actual_student_ids), (
-            f"Найдены оценки других студентов.\n"
-            f"Expected student_id: {student_id}\n"
-            f"Actual student_ids: {set(actual_student_ids)}"
+        TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=teacher_id,
+            student_id=other_student.id,
+            count=3
         )
 
-        assert stats.count == expected.count, (
-            f"Count не совпадает.\n"
-            f"Expected: {expected.count}\n"
-            f"Actual: {stats.count}"
-        )
+        # 3. Выполняем действие
+        stats = grade_admin.get_grades_stats(student_id=target_student_id)
 
-        assert stats.min == expected.min, (
-            f"Min не совпадает.\n"
-            f"Expected: {expected.min}\n"
-            f"Actual: {stats.min}"
-        )
+        # 4. Сравнение с эталоном
+        expected = TestDataHelper.calculate_grades_stats(target_grades)
 
-        assert stats.max == expected.max, (
-            f"Max не совпадает.\n"
-            f"Expected: {expected.max}\n"
-            f"Actual: {stats.max}"
-        )
-
-        actual_avg = round(stats.avg, 2)
-        expected_avg = round(expected.avg, 2)
-        assert actual_avg == expected_avg, (
-            f"Average не совпадает.\n"
-            f"Expected: {expected_avg}\n"
-            f"Actual: {actual_avg}\n"
-            f"Raw values - Expected: {expected.avg}, Actual: {stats.avg}"
+        assert stats == expected, (
+            f"Статистика не совпадает.\n"
+            f"Expected: {expected}\n"
+            f"Actual: {stats}"
         )
 
     def test_get_grades_stats_with_group_id_only(self, university_api_utils_admin, create_teacher, create_student,
-                                                 create_group):
-        """
-        Проверяет фильтрацию статистики только по group_id
-        Ожидаем: статистика только для оценок студентов из этой группы
-        """
+                                                 create_group, group_factory, student_factory):
         grade_admin = UniversityService(university_api_utils_admin)
         teacher_id = create_teacher.id
-        student_id = create_student.id
-        group_id = create_group.id
 
-        created_grades = TestDataHelper.create_multiple_grades(
+        # 1. Создаем ЦЕЛЕВУЮ группу и её оценки
+        target_group_id = create_group.id
+        target_student_id = create_student.id
+
+        target_grades = TestDataHelper.create_multiple_grades(
             grade_admin=grade_admin,
             teacher_id=teacher_id,
-            student_id=student_id,
+            student_id=target_student_id,
             count=5
         )
 
-        stats = grade_admin.get_grades_stats(group_id=group_id)
-        all_grades = grade_admin.get_grades(group_id=group_id)
-        expected = TestDataHelper.calculate_grades_stats(all_grades)
+        # 2. Создаем ВТОРУЮ группу и её оценки
+        group = group_factory()
+        second_student = student_factory(group_id=group.id)
 
-        actual_student_ids = [g.student_id for g in all_grades]
-        assert all(s == student_id for s in actual_student_ids), (
-            f"Найдены оценки студентов не из этой группы.\n"
-            f"Expected student_id: {student_id}\n"
-            f"Actual student_ids: {set(actual_student_ids)}"
+        TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=teacher_id,
+            student_id=second_student.id,
+            count=3
         )
 
-        assert stats.count == expected.count, (
-            f"Count не совпадает.\n"
-            f"Expected: {expected.count}\n"
-            f"Actual: {stats.count}"
-        )
+        # 3. Выполняем действие
+        stats = grade_admin.get_grades_stats(group_id=target_group_id)
 
-        assert stats.min == expected.min, (
-            f"Min не совпадает.\n"
-            f"Expected: {expected.min}\n"
-            f"Actual: {stats.min}"
-        )
+        # 4. Проверки
+        expected_stats = TestDataHelper.calculate_grades_stats(target_grades)
 
-        assert stats.max == expected.max, (
-            f"Max не совпадает.\n"
-            f"Expected: {expected.max}\n"
-            f"Actual: {stats.max}"
-        )
-
-        actual_avg = round(stats.avg, 2)
-        expected_avg = round(expected.avg, 2)
-        assert actual_avg == expected_avg, (
-            f"Average не совпадает.\n"
-            f"Expected: {expected_avg}\n"
-            f"Actual: {actual_avg}\n"
-            f"Raw values - Expected: {expected.avg}, Actual: {stats.avg}"
+        assert stats == expected_stats, (
+            f"Статистика не совпадает.\n"
+            f"Expected: {expected_stats}\n"
+            f"Actual: {stats}"
         )
 
     def test_get_grades_stats_with_teacher_id_and_student_id_params(self, university_api_utils_admin, create_teacher,
-                                                                    create_student):
-        """
-        Проверяет фильтрацию статистики по teacher_id и student_id одновременно
-        Ожидаем: статистика только для оценок этого учителя у этого студента
-        """
+                                                                    create_student, group_factory, student_factory):
         grade_admin = UniversityService(university_api_utils_admin)
-        teacher_id = create_teacher.id
-        student_id = create_student.id
 
-        created_grades = TestDataHelper.create_multiple_grades(
+        # 1. Целевая пара: учитель + студент
+        target_teacher_id = create_teacher.id
+        target_student_id = create_student.id
+
+        target_grades = TestDataHelper.create_multiple_grades(
             grade_admin=grade_admin,
-            teacher_id=teacher_id,
-            student_id=student_id,
+            teacher_id=target_teacher_id,
+            student_id=target_student_id,
             count=5
         )
 
+        # 2. Тот же учитель, но ДРУГОЙ студент
+        group = group_factory()
+        other_student = student_factory(group_id=group.id)
+
+        TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=target_teacher_id,
+            student_id=other_student.id,
+            count=3
+        )
+
+        # 3. ДРУГОЙ учитель, но тот же студент
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        subject = Subject.MATHEMATICS
+
+        other_teacher = grade_admin.create_teacher(
+            TeacherRequestSchema(
+                first_name=first_name,
+                last_name=last_name,
+                subject=subject))
+
+        TestDataHelper.create_multiple_grades(
+            grade_admin=grade_admin,
+            teacher_id=other_teacher.id,
+            student_id=target_student_id,
+            count=3
+        )
+
+        # 4. Выполняем действие
         stats = grade_admin.get_grades_stats(
-            teacher_id=teacher_id,
-            student_id=student_id
+            teacher_id=target_teacher_id,
+            student_id=target_student_id
         )
 
-        all_grades = grade_admin.get_grades(
-            teacher_id=teacher_id,
-            student_id=student_id
-        )
-        expected = TestDataHelper.calculate_grades_stats(all_grades)
+        # 5. Сравнение с эталоном из setup
+        expected = TestDataHelper.calculate_grades_stats(target_grades)
 
-        actual_teacher_ids = [g.teacher_id for g in all_grades]
-        assert all(t == teacher_id for t in actual_teacher_ids), (
-            f"Найдены оценки других учителей.\n"
-            f"Expected teacher_id: {teacher_id}\n"
-            f"Actual teacher_ids: {set(actual_teacher_ids)}"
-        )
-
-        actual_student_ids = [g.student_id for g in all_grades]
-        assert all(s == student_id for s in actual_student_ids), (
-            f"Найдены оценки других студентов.\n"
-            f"Expected student_id: {student_id}\n"
-            f"Actual student_ids: {set(actual_student_ids)}"
-        )
-
-        assert stats.count == expected.count, (
-            f"Count не совпадает.\n"
-            f"Expected: {expected.count}\n"
-            f"Actual: {stats.count}"
-        )
-
-        assert stats.min == expected.min, (
-            f"Min не совпадает.\n"
-            f"Expected: {expected.min}\n"
-            f"Actual: {stats.min}"
-        )
-
-        assert stats.max == expected.max, (
-            f"Max не совпадает.\n"
-            f"Expected: {expected.max}\n"
-            f"Actual: {stats.max}"
-        )
-
-        actual_avg = round(stats.avg, 2)
-        expected_avg = round(expected.avg, 2)
-        assert actual_avg == expected_avg, (
-            f"Average не совпадает.\n"
-            f"Expected: {expected_avg}\n"
-            f"Actual: {actual_avg}\n"
-            f"Raw values - Expected: {expected.avg}, Actual: {stats.avg}"
+        assert stats == expected, (
+            f"Статистика не совпадает.\n"
+            f"Expected: {expected}\n"
+            f"Actual: {stats}"
         )
