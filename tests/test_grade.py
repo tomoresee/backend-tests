@@ -6,10 +6,9 @@ from logger.logger import Logger
 from services.university.constants import GradeConstants
 from services.university.helpers.test_data_helpers import TestDataHelper
 from services.university.models.grade_schema import GradeRequestSchema, GradeStatisticResponseSchema
-from services.university.models.group_schema import GroupRequestSchema, Degree
-from services.university.models.student_schema import StudentRequestSchema
 from services.university.models.teachers_schema import Subject, TeacherRequestSchema
 from services.university.university_service import UniversityService
+from utils.assertions import soft_assert
 
 fake = Faker()
 
@@ -51,7 +50,7 @@ class TestGrade:
 
         Logger.info("Шаг 2. Обновление оценки")
 
-        updated_grade_value = grade + 1 if grade < 5 else grade - 1
+        updated_grade_value = grade + 1 if grade < GradeConstants.MAX_GRADE else grade - 1
         updated_grade = grade_admin.update_grade(
             grade_id=grade_id,
             grade_request=GradeRequestSchema(
@@ -93,20 +92,10 @@ class TestGrade:
 
         Logger.info("Шаг 3. Проверяем, что при обновлении ID не меняется, а значение обновляется корректно")
 
-        errors = []
-
-        try:
-            assert updated_grade.id == grade_id
-        except AssertionError:
-            errors.append(f"ID изменился: {updated_grade.id} != {grade_id}")
-
-        try:
-            assert updated_grade.grade == updated_grade_value
-        except AssertionError:
-            errors.append(f"Оценка не обновилась: {updated_grade.grade} != {updated_grade_value}")
-
-        if errors:
-            raise AssertionError("\n".join(errors))
+        with soft_assert() as check:
+            check(updated_grade.id == grade_id, f"ID изменился: {updated_grade.id} != {grade_id}")
+            check(updated_grade.grade == updated_grade_value,
+                  f"Оценка не обновилась: {updated_grade.grade} != {updated_grade_value}")
 
     def test_delete_grade(self, university_api_utils_admin, create_grade):
         Logger.info("Шаг 1. Создание оценки для удаления")
