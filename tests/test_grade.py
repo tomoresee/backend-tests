@@ -1,4 +1,4 @@
-import random
+import allure
 
 from faker import Faker
 
@@ -14,27 +14,44 @@ fake = Faker()
 
 
 class TestGrade:
+
+    @allure.epic("University Service")
+    @allure.feature("Grade Management")
+    @allure.story("Create Grade")
+    @allure.title("Создание оценки и проверка её наличия в списке")
     def test_create_grade(
             self, university_api_utils_admin, create_teacher, create_student
     ):
-        Logger.info("Шаг 1. Создание оценки")
+        with allure.step("Создание оценки"):
+            Logger.info("Шаг 1. Создание оценки")
 
-        grade_admin = UniversityService(university_api_utils_admin)
-        teacher_id = create_teacher.id
-        student_id = create_student.id
-        grade = fake.random_int(GradeConstants.MIN_GRADE, GradeConstants.MAX_GRADE)
+            grade_admin = UniversityService(university_api_utils_admin)
+            teacher_id = create_teacher.id
+            student_id = create_student.id
+            grade = fake.random_int(GradeConstants.MIN_GRADE, GradeConstants.MAX_GRADE)
 
-        created_grade = grade_admin.create_grade(
-            GradeRequestSchema(
-                teacher_id=teacher_id, student_id=student_id, grade=grade
+            created_grade = grade_admin.create_grade(
+                GradeRequestSchema(
+                    teacher_id=teacher_id,
+                    student_id=student_id,
+                    grade=grade
+                )
             )
-        )
 
-        Logger.info("Шаг 2. Проверяем что оценка действительно создана")
+            allure.attach(
+                f"Teacher ID: {teacher_id}\nStudent ID: {student_id}\nGrade: {grade}",
+                name="Параметры созданной оценки",
+                attachment_type=allure.attachment_type.TEXT
+            )
 
-        grades = grade_admin.get_grades()
+        with allure.step("Проверка что оценка действительно создана"):
+            Logger.info("Шаг 2. Проверяем что оценка действительно создана")
 
-        assert created_grade in grades, f"Оценка {created_grade} не найдена в списке"
+            grades = grade_admin.get_grades()
+
+            with allure.step(f"Поиск оценки с ID {created_grade.id} в списке"):
+                assert created_grade in grades, f"Оценка {created_grade} не найдена в списке"
+                Logger.info(f"Оценка {created_grade} успешно найдена в списке")
 
     def test_updated_grade_exists_in_list(
             self, university_api_utils_admin, create_grade
