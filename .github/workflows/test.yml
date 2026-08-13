@@ -66,12 +66,17 @@ jobs:
       - name: Generate Allure report
         if: always()
         run: |
-          docker run --rm -v $(pwd)/allure-results:/app/allure-results my-tests allure generate /app/allure-results -o /app/allure-report --clean
+          mkdir -p allure-report
+          docker run --rm \
+            -v $(pwd)/allure-results:/app/allure-results \
+            -v $(pwd)/allure-report:/app/allure-report \
+            my-tests \
+            sh -c "allure generate /app/allure-results -o /app/allure-report --clean"
 
       - name: Deploy to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          personal_token: ${{ secrets.GH_TOKEN }}
           publish_dir: allure-report
           publish_branch: gh-pages
