@@ -26,7 +26,7 @@ from utils.api_utils import ApiUtils
 
 
 class UniversityService(BaseService):
-    SERVICE_URL = "http://127.0.0.1:8001"
+    SERVICE_URL = "http://host.docker.internal:8001"
 
     def __init__(self, api_utils: ApiUtils):
         super().__init__(api_utils)
