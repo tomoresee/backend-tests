@@ -33,6 +33,16 @@ jobs:
         run: |
           docker compose up -d
 
+      - name: Check services status
+        run: |
+          docker compose ps
+          echo "Waiting for services to be ready..."
+          sleep 10
+          echo "Checking auth service..."
+          curl -v http://localhost:8000/docs || echo "Auth not responding"
+          echo "Checking university service..."
+          curl -v http://localhost:8001/docs || echo "University not responding"
+
       - name: Run tests
         run: |
           docker run \
