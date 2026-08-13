@@ -1,0 +1,20 @@
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 158' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=james59&password=ND2a%25dFCygp1CdsJj%40%24o9qfm3%25KG0%2A&password_repeat=ND2a%25dFCygp1CdsJj%40%24o9qfm3%25KG0%2A&email=villaelizabeth%40example.net' http://auth:8000/auth/register/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.273243'
+{
+  "detail": "User registered"
+}
+
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 66' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=james59&password=ND2a%25dFCygp1CdsJj%40%24o9qfm3%25KG0%2A' http://auth:8000/auth/login/
+INFO     Logger:logger.py:32 Response status code='200', elapsed_time='0:00:00.313306'
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJ1c2VybmFtZSI6ImphbWVzNTkiLCJleHAiOjE3ODY2NDAwMzMsImlhdCI6MTc4NjYzMjgzM30.ToOG2behVMfF5EQEOaBke0KsuiEKkwPiNjhg3NszC3BAf5HE5uh6kfJ91n_mTCimcXSv03PptigAX1WwbEx6K9oUCuXHCVlRCMr6-BcI53Cr9w95YeaOLBp-AsbPOR0k879B0DainsYAATFo-5gAVWWmixTXaanqQa3CjBaE3TDV4G-ZRyI2v0P78rl_T1xKG2U56G49kn8_gQD6hXABdaMNjotZG4O8kUlOftXgIpqdeyv3YpR-z6k-BvrXgFbq0OAJ5aYCyg6nN76F0kZym73oLO6Ga8IqWOfZ5TCE4Vg_OuqwelkKvqQROwYLpBj0PemRFEqhSxoUEsKzWecztw",
+  "token_type": "Bearer"
+}
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJ1c2VybmFtZSI6ImphbWVzNTkiLCJleHAiOjE3ODY2NDAwMzMsImlhdCI6MTc4NjYzMjgzM30.ToOG2behVMfF5EQEOaBke0KsuiEKkwPiNjhg3NszC3BAf5HE5uh6kfJ91n_mTCimcXSv03PptigAX1WwbEx6K9oUCuXHCVlRCMr6-BcI53Cr9w95YeaOLBp-AsbPOR0k879B0DainsYAATFo-5gAVWWmixTXaanqQa3CjBaE3TDV4G-ZRyI2v0P78rl_T1xKG2U56G49kn8_gQD6hXABdaMNjotZG4O8kUlOftXgIpqdeyv3YpR-z6k-BvrXgFbq0OAJ5aYCyg6nN76F0kZym73oLO6Ga8IqWOfZ5TCE4Vg_OuqwelkKvqQROwYLpBj0PemRFEqhSxoUEsKzWecztw' http://university:8000/grades/stats/
+INFO     Logger:logger.py:32 Response status code='200', elapsed_time='0:00:00.009452'
+{
+  "count": 42,
+  "min": 1,
+  "max": 5,
+  "avg": 3.5238095238095237
+}
