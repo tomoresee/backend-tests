@@ -29,6 +29,10 @@ jobs:
         run: |
           docker build -t my-tests .
 
+      - name: Run Ruff linter
+        run: |
+          docker run --rm -v $(pwd):/app my-tests ruff check /app
+
       - name: Start test system
         run: |
           docker compose up -d
