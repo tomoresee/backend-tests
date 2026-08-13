@@ -5,7 +5,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     wget \
     unzip \
-    openjdk-17-jre-headless \
+    openjdk-21-jre-headless \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip \
