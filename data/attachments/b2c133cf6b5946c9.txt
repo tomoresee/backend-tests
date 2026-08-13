@@ -1,5 +1,0 @@
-INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer invalid-token' http://university:8000/grades/
-INFO     Logger:logger.py:32 Response status code='401', elapsed_time='0:00:00.004187'
-{
-  "detail": "Invalid JWT token"
-}
