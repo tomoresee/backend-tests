@@ -5,10 +5,11 @@ from services.auth.models.login_schema import LoginRequestsSchema, LoginResponse
 from services.auth.models.register_schema import RegisterRequestSchema, SuccessResponseSchema
 from services.general.base_service import BaseService
 from utils.api_utils import ApiUtils
+from utils.config import AUTH_URL
 
 
 class AuthService(BaseService):
-    SERVICE_URL = "http://host.docker.internal:8000"
+    SERVICE_URL = AUTH_URL
 
     def __init__(self, api_utils: ApiUtils):
         super().__init__(api_utils)

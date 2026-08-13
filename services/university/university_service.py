@@ -23,10 +23,11 @@ from services.university.models.teachers_schema import (
 )
 
 from utils.api_utils import ApiUtils
+from utils.config import UNIVERSITY_URL
 
 
 class UniversityService(BaseService):
-    SERVICE_URL = "http://host.docker.internal:8001"
+    SERVICE_URL = UNIVERSITY_URL
 
     def __init__(self, api_utils: ApiUtils):
         super().__init__(api_utils)
