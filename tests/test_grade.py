@@ -1,5 +1,4 @@
 import allure
-
 from faker import Faker
 
 from logger.logger import Logger

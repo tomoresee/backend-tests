@@ -1,18 +1,18 @@
 import random
 
 import pytest
+from faker import Faker
 
 from services.auth.auth_service import AuthService
 from services.auth.models.login_schema import LoginRequestsSchema
 from services.auth.models.register_schema import RegisterRequestSchema
 from services.university.constants import GradeConstants
 from services.university.models.grade_schema import GradeRequestSchema
-from services.university.models.group_schema import GroupRequestSchema, Degree
+from services.university.models.group_schema import Degree, GroupRequestSchema
 from services.university.models.student_schema import StudentRequestSchema
-from services.university.models.teachers_schema import TeacherRequestSchema, Subject
+from services.university.models.teachers_schema import Subject, TeacherRequestSchema
 from services.university.university_service import UniversityService
 from utils.api_utils import ApiUtils
-from faker import Faker
 
 fake = Faker()
 

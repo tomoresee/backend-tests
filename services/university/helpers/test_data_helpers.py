@@ -1,7 +1,8 @@
+from faker import Faker
+
 from logger.logger import Logger
 from services.university.constants import GradeConstants, GradeDefaultCountsConstants
 from services.university.models.grade_schema import GradeRequestSchema, GradeStatisticResponseSchema
-from faker import Faker
 
 fake = Faker()
 

@@ -33,5 +33,5 @@ class TestTeacher:
         teachers = university_admin.get_teachers()
 
         assert (
-            created_teacher in teachers
+                created_teacher in teachers
         ), f"Учитель {created_teacher} не найден в списке"

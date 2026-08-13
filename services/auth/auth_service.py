@@ -1,7 +1,6 @@
 from services.auth.helpers.authorization_helper import AuthorizationHelper
 from services.auth.helpers.user_helper import UserHelper
 from services.auth.models.login_schema import LoginRequestsSchema, LoginResponseSchema
-
 from services.auth.models.register_schema import RegisterRequestSchema, SuccessResponseSchema
 from services.general.base_service import BaseService
 from utils.api_utils import ApiUtils

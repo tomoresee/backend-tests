@@ -21,7 +21,6 @@ from services.university.models.teachers_schema import (
     TeacherRequestSchema,
     TeacherResponseSchema,
 )
-
 from utils.api_utils import ApiUtils
 from utils.config import UNIVERSITY_URL
 
@@ -42,13 +41,13 @@ class UniversityService(BaseService):
         return GroupResponseSchema(**response.json())
 
     def create_student(
-        self, student_request: StudentRequestSchema
+            self, student_request: StudentRequestSchema
     ) -> StudentResponseSchema:
         response = self.student_helper.post_student(json=student_request.model_dump())
         return StudentResponseSchema(**response.json())
 
     def create_teacher(
-        self, teacher_request: TeacherRequestSchema
+            self, teacher_request: TeacherRequestSchema
     ) -> TeacherResponseSchema:
         response = self.teacher_helper.post_teacher(json=teacher_request.model_dump())
         return TeacherResponseSchema(**response.json())
@@ -62,7 +61,7 @@ class UniversityService(BaseService):
         return GradeResponseSchema(**response.json())
 
     def update_grade(
-        self, grade_id: int, grade_request: GradeRequestSchema
+            self, grade_id: int, grade_request: GradeRequestSchema
     ) -> GradeResponseSchema:
         response = self.grade_helper.put_grade(
             grade_id=grade_id, data=grade_request.model_dump()
@@ -74,7 +73,7 @@ class UniversityService(BaseService):
         return GradeDeleteResponseSchema(**response.json())
 
     def get_grades(
-        self, student_id=None, teacher_id=None, group_id=None
+            self, student_id=None, teacher_id=None, group_id=None
     ) -> list[GradeResponseSchema]:
         response = self.grade_helper.get_grades(
             student_id=student_id,
@@ -84,7 +83,7 @@ class UniversityService(BaseService):
         return [GradeResponseSchema(**grade) for grade in response.json()]
 
     def get_grades_stats(
-        self, student_id=None, teacher_id=None, group_id=None
+            self, student_id=None, teacher_id=None, group_id=None
     ) -> GradeStatisticResponseSchema:
         response = self.grade_helper.get_grades_stats(
             student_id=student_id,

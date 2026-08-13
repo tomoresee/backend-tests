@@ -1,6 +1,7 @@
-import requests
-import curlify
 import json
+
+import curlify
+import requests
 
 from logger.logger import Logger
 from utils.json_utils import JsonUtils
