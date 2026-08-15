@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN mkdir -p /app/allure-results /app/allure-report
 
-CMD ["sh", "-c", "pytest tests/ --alluredir=/app/allure-results && allure generate /app/allure-results -o /app/allure-report --clean"]
+CMD ["pytest", "tests/", "--alluredir=/app/allure-results"]
