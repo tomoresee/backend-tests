@@ -22,7 +22,7 @@ allure-report/
 .git
 .gitignore
 
-# Файлы окружения (не нужны в образе)
+# Файлы окружения
 .env
 .env.*
 !.env.example
@@ -39,10 +39,7 @@ readme.md
 allure-results/
 allure-report/
 
-# Файлы зависимостей (уже скопированы через requirements.txt)
-requirements.txt
-
-# Конфиги (не нужны в образе)
+# Конфиги
 pyproject.toml
 ruff.toml
 ruff.toml
