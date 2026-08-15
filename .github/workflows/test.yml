@@ -16,10 +16,10 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "POSTGRES_USER=postgres" >> .env
-          echo "POSTGRES_PASSWORD=postgres" >> .env
-          echo "POSTGRES_DB_AUTH=auth_db" >> .env
-          echo "POSTGRES_DB_UNIVERSITY=university_db" >> .env
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_DB_AUTH=${{ secrets.POSTGRES_DB_AUTH }}" >> .env
+          echo "POSTGRES_DB_UNIVERSITY=${{ secrets.POSTGRES_DB_UNIVERSITY }}" >> .env
           echo "UNIVERSITY_SERVICE_INTERNAL_URL=http://university:8000" >> .env
           echo "UNIVERSITY_SERVICE_API_URL=http://university:8000" >> .env
           echo "AUTH_SERVICE_INTERNAL_URL=http://auth:8000" >> .env
