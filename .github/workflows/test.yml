@@ -7,7 +7,6 @@ on:
     branches: [ main ]
 
 jobs:
-  # ДЖОБА 1: Линтер
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +21,6 @@ jobs:
         run: |
           docker run --rm -v $(pwd):/app my-tests ruff check /app
 
-  # ДЖОБА 2: Подготовка окружения и тесты
   test:
     runs-on: ubuntu-latest
     needs: lint
@@ -69,12 +67,19 @@ jobs:
             -e UNIVERSITY_SERVICE_API_URL=http://university:8000 \
             my-tests
 
-      - name: Upload Allure results
+      - name: Generate Allure report
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results/
+        run: |
+          docker run --rm \
+            -v $(pwd)/allure-results:/app/allure-results \
+            -v $(pwd)/allure-report:/app/allure-report \
+            my-tests \
+            sh -c "allure generate /app/allure-results -o /app/allure-report --clean"
+
+      - name: Stop containers
+        if: always()
+        run: |
+          docker compose down -v
 
       - name: Upload Allure report
         if: always()
@@ -83,44 +88,18 @@ jobs:
           name: allure-report
           path: allure-report/
 
-  # ДЖОБА 3: Деплой
   deploy:
     runs-on: ubuntu-latest
     needs: test
     if: always()
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Download Allure results
-        uses: actions/download-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results/
-
       - name: Download Allure report
         uses: actions/download-artifact@v4
         with:
           name: allure-report
           path: allure-report/
 
-      - name: Generate Allure report (if results exist)
-        if: always()
-        run: |
-          mkdir -p allure-report
-          if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
-            docker run --rm \
-              -v $(pwd)/allure-results:/app/allure-results \
-              -v $(pwd)/allure-report:/app/allure-report \
-              my-tests \
-              sh -c "allure generate /app/allure-results -o /app/allure-report --clean"
-          else
-            echo "No allure-results found, skipping report generation"
-            echo "<html><body><h1>No test results available</h1></body></html>" > allure-report/index.html
-          fi
-
       - name: Deploy to GitHub Pages
-        if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
