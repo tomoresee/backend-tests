@@ -1,0 +1,6 @@
+[2026-08-15 08:31:47,011 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer invalid-token' http://university:8000/grades/
+[2026-08-15 08:31:47,011 - INFO] - Response status code='401', elapsed_time='0:00:00.004387'
+{
+  "detail": "Invalid JWT token"
+}
+
