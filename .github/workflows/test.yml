@@ -13,13 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build tests image
-        run: |
-          docker build -t my-tests .
-
       - name: Run Ruff linter
-        run: |
-          docker run --rm -v $(pwd):/app my-tests ruff check /app
+        uses: astral-sh/ruff-action@v1
+        with:
+          args: "check ."
 
   test:
     runs-on: ubuntu-latest
