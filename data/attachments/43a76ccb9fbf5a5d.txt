@@ -1,0 +1,22 @@
+[2026-08-15 09:28:39,642 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 150' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=dustin76&password=7JN3%294Gdy_j%2AfcrqFC2ZoonKv%29fQcO&password_repeat=7JN3%294Gdy_j%2AfcrqFC2ZoonKv%29fQcO&email=flemingedward%40example.net' http://auth:8000/auth/register/
+[2026-08-15 09:28:39,642 - INFO] - Response status code='201', elapsed_time='0:00:00.274170'
+{
+  "detail": "User registered"
+}
+
+[2026-08-15 09:28:39,996 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 63' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=dustin76&password=7JN3%294Gdy_j%2AfcrqFC2ZoonKv%29fQcO' http://auth:8000/auth/login/
+[2026-08-15 09:28:39,996 - INFO] - Response status code='200', elapsed_time='0:00:00.313246'
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJ1c2VybmFtZSI6ImR1c3Rpbjc2IiwiZXhwIjoxNzg2NzkzMzE5LCJpYXQiOjE3ODY3ODYxMTl9.Obz5lg33SO50b9sBuwJFjwYIEreylWtle3ClCJwwDsTGF6-G7UnD97hUskGV_SDaWDcbpeTuKUM-bhprrC8jVhxwhsNZnpxTojkIXrtBvn-sc_CrxsdNl4dfNpYBZHe5UgQoogmZ5Lq7Jo3IKdMAVBSUEZ4nnTOWOIWEa9_bVorKSm_d-PbJtr1M_l2XMi-VBzwPM-rndG3aaVVUrLOegn__FzCXxpetyVoFugiZaion5EvZjShD39e8MYg40Y0-co61NLW3eNZFS-ydfKbaVKvAvZjHts2QNYTk5Bk6adc7TdQfiIeou7OCbHytXxLhfjH6_bjpe6g9b2uN6pj_Bg",
+  "token_type": "Bearer"
+}
+
+[2026-08-15 09:28:40,006 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJ1c2VybmFtZSI6ImR1c3Rpbjc2IiwiZXhwIjoxNzg2NzkzMzE5LCJpYXQiOjE3ODY3ODYxMTl9.Obz5lg33SO50b9sBuwJFjwYIEreylWtle3ClCJwwDsTGF6-G7UnD97hUskGV_SDaWDcbpeTuKUM-bhprrC8jVhxwhsNZnpxTojkIXrtBvn-sc_CrxsdNl4dfNpYBZHe5UgQoogmZ5Lq7Jo3IKdMAVBSUEZ4nnTOWOIWEa9_bVorKSm_d-PbJtr1M_l2XMi-VBzwPM-rndG3aaVVUrLOegn__FzCXxpetyVoFugiZaion5EvZjShD39e8MYg40Y0-co61NLW3eNZFS-ydfKbaVKvAvZjHts2QNYTk5Bk6adc7TdQfiIeou7OCbHytXxLhfjH6_bjpe6g9b2uN6pj_Bg' http://university:8000/grades/stats/
+[2026-08-15 09:28:40,006 - INFO] - Response status code='200', elapsed_time='0:00:00.009235'
+{
+  "count": 44,
+  "min": 1,
+  "max": 5,
+  "avg": 3.090909090909091
+}
+
