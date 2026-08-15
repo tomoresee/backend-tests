@@ -1,0 +1,103 @@
+[2026-08-15 08:23:15,230 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 168' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=pgibson&password=%21z%2BGIz%21o%29m4U%40MSu%29F4i%21o%2394NHUjB&password_repeat=%21z%2BGIz%21o%29m4U%40MSu%29F4i%21o%2394NHUjB&email=garzamichael%40example.com' http://auth:8000/auth/register/
+[2026-08-15 08:23:15,230 - INFO] - Response status code='201', elapsed_time='0:00:00.273025'
+{
+  "detail": "User registered"
+}
+
+[2026-08-15 08:23:15,584 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 72' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=pgibson&password=%21z%2BGIz%21o%29m4U%40MSu%29F4i%21o%2394NHUjB' http://auth:8000/auth/login/
+[2026-08-15 08:23:15,585 - INFO] - Response status code='200', elapsed_time='0:00:00.313700'
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJ1c2VybmFtZSI6InBnaWJzb24iLCJleHAiOjE3ODY3ODkzOTUsImlhdCI6MTc4Njc4MjE5NX0.TYr2HGddc3BM3cVR6WgWouH6GHQ7NbHvg80y0digh-m-BV4B-h4mda3zKdEq33CEFY7uW1HeSDalR_WIS0l1EtQpH7A-mPnHf-Fr6_1BhGePrlbFaQbJRmukjhX1GNeKyfwKgGWCpDRwTMiP6x-NvG3nv2XiCucklWjxO45KDIZ5bWosjpa5SLfdC4V0EfHGVG4_pHBUADkq2DTlBmj_7LDYTSN9BpmK4-YofmAnTAUNs_YV-SOpAybQ-ukVKAkRdfbQZLSRI1YYKRyP2WDR2u1_93FnOQPpHxw80I_R92eTYZoMgzA1eNVVBR2FskbGSe9tR6eBsU035qqFdZsVYA",
+  "token_type": "Bearer"
+}
+
+[2026-08-15 08:23:15,586 - INFO] - Шаг 1. Создание учителя
+[2026-08-15 08:23:15,597 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJ1c2VybmFtZSI6InBnaWJzb24iLCJleHAiOjE3ODY3ODkzOTUsImlhdCI6MTc4Njc4MjE5NX0.TYr2HGddc3BM3cVR6WgWouH6GHQ7NbHvg80y0digh-m-BV4B-h4mda3zKdEq33CEFY7uW1HeSDalR_WIS0l1EtQpH7A-mPnHf-Fr6_1BhGePrlbFaQbJRmukjhX1GNeKyfwKgGWCpDRwTMiP6x-NvG3nv2XiCucklWjxO45KDIZ5bWosjpa5SLfdC4V0EfHGVG4_pHBUADkq2DTlBmj_7LDYTSN9BpmK4-YofmAnTAUNs_YV-SOpAybQ-ukVKAkRdfbQZLSRI1YYKRyP2WDR2u1_93FnOQPpHxw80I_R92eTYZoMgzA1eNVVBR2FskbGSe9tR6eBsU035qqFdZsVYA' -H 'Content-Length: 70' -H 'Content-Type: application/json' -d '{"first_name": "Michelle", "last_name": "Clark", "subject": "History"}' http://university:8000/teachers/
+[2026-08-15 08:23:15,597 - INFO] - Response status code='201', elapsed_time='0:00:00.010636'
+{
+  "first_name": "Michelle",
+  "last_name": "Clark",
+  "subject": "History",
+  "id": 12
+}
+
+[2026-08-15 08:23:15,597 - INFO] - Создан учитель: first_name='Michelle' last_name='Clark' subject='History' id=12
+[2026-08-15 08:23:15,598 - INFO] - ID созданного учителя: 12
+[2026-08-15 08:23:15,598 - INFO] - Шаг 2. Проверяем что учитель действительно создан
+[2026-08-15 08:23:15,647 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJ1c2VybmFtZSI6InBnaWJzb24iLCJleHAiOjE3ODY3ODkzOTUsImlhdCI6MTc4Njc4MjE5NX0.TYr2HGddc3BM3cVR6WgWouH6GHQ7NbHvg80y0digh-m-BV4B-h4mda3zKdEq33CEFY7uW1HeSDalR_WIS0l1EtQpH7A-mPnHf-Fr6_1BhGePrlbFaQbJRmukjhX1GNeKyfwKgGWCpDRwTMiP6x-NvG3nv2XiCucklWjxO45KDIZ5bWosjpa5SLfdC4V0EfHGVG4_pHBUADkq2DTlBmj_7LDYTSN9BpmK4-YofmAnTAUNs_YV-SOpAybQ-ukVKAkRdfbQZLSRI1YYKRyP2WDR2u1_93FnOQPpHxw80I_R92eTYZoMgzA1eNVVBR2FskbGSe9tR6eBsU035qqFdZsVYA' http://university:8000/teachers/
+[2026-08-15 08:23:15,648 - INFO] - Response status code='200', elapsed_time='0:00:00.009422'
+[
+  {
+    "first_name": "Lisa",
+    "last_name": "Jones",
+    "subject": "Mathematics",
+    "id": 1
+  },
+  {
+    "first_name": "Caitlin",
+    "last_name": "Mclaughlin",
+    "subject": "Geography",
+    "id": 2
+  },
+  {
+    "first_name": "David",
+    "last_name": "Bryant",
+    "subject": "Mathematics",
+    "id": 3
+  },
+  {
+    "first_name": "Deanna",
+    "last_name": "Long",
+    "subject": "History",
+    "id": 4
+  },
+  {
+    "first_name": "Michael",
+    "last_name": "Elliott",
+    "subject": "Biology",
+    "id": 5
+  },
+  {
+    "first_name": "Christopher",
+    "last_name": "Bryant",
+    "subject": "Biology",
+    "id": 6
+  },
+  {
+    "first_name": "Claire",
+    "last_name": "Gibson",
+    "subject": "Mathematics",
+    "id": 7
+  },
+  {
+    "first_name": "Ian",
+    "last_name": "Tran",
+    "subject": "Geography",
+    "id": 8
+  },
+  {
+    "first_name": "Veronica",
+    "last_name": "Mills",
+    "subject": "Mathematics",
+    "id": 9
+  },
+  {
+    "first_name": "Dana",
+    "last_name": "Walker",
+    "subject": "Geography",
+    "id": 10
+  },
+  {
+    "first_name": "Steven",
+    "last_name": "Young",
+    "subject": "Mathematics",
+    "id": 11
+  },
+  {
+    "first_name": "Michelle",
+    "last_name": "Clark",
+    "subject": "History",
+    "id": 12
+  }
+]
+
