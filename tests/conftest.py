@@ -28,7 +28,7 @@ def service_readiness_fixture(service_class, service_name):
             try:
                 response = requests.get(service_class.SERVICE_URL + "/docs")
                 response.raise_for_status()
-            except:
+            except (requests.ConnectionError, requests.Timeout, requests.HTTPError):
                 time.sleep(1)
             else:
                 break
