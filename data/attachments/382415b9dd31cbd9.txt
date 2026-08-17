@@ -1,0 +1,276 @@
+[2026-08-17 13:08:26,384 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 150' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=sperez&password=TJ813kiYJUD3Nq8KcL107OmB7Je%21%21%2B&password_repeat=TJ813kiYJUD3Nq8KcL107OmB7Je%21%21%2B&email=cummingskathryn%40example.net' http://auth:8000/auth/register/
+[2026-08-17 13:08:26,384 - INFO] - Response status code='201', elapsed_time='0:00:00.273118'
+{
+  "detail": "User registered"
+}
+
+[2026-08-17 13:08:26,738 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 61' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=sperez&password=TJ813kiYJUD3Nq8KcL107OmB7Je%21%21%2B' http://auth:8000/auth/login/
+[2026-08-17 13:08:26,739 - INFO] - Response status code='200', elapsed_time='0:00:00.313366'
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6InNwZXJleiIsImV4cCI6MTc4Njk3OTMwNiwiaWF0IjoxNzg2OTcyMTA2fQ.baClVt6dFazsrGj4PfExUQ7UucMIQ3sak_26m-_FNTvtx01nDODLX1n8-x6zgHSP4a6leJYlVGttlJUqFYHbx3Uw10z_qMk8e-sTL1uHml7zvuvBulE8Dzd8Gc_e7i6JVW-ZDwh8fR2-r-V5My733VawA-IYhL1xFS_jO1jCtwiT4NMmIqOGskctdUnYN5BlXImZm0YXJiPih0d7RSlqhXPQKfDdA9KdbiWYK27BaMk8ZsujwSaVq3rEeA2u98qQeCutI9DyGrtxf8xqsD5upuptVK04Z3otOTzrJy8B8J3HHAo54axCxs708X3EJPjJHI5cUheOaH6OTHJHciwZGg",
+  "token_type": "Bearer"
+}
+
+[2026-08-17 13:08:26,749 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6InNwZXJleiIsImV4cCI6MTc4Njk3OTMwNiwiaWF0IjoxNzg2OTcyMTA2fQ.baClVt6dFazsrGj4PfExUQ7UucMIQ3sak_26m-_FNTvtx01nDODLX1n8-x6zgHSP4a6leJYlVGttlJUqFYHbx3Uw10z_qMk8e-sTL1uHml7zvuvBulE8Dzd8Gc_e7i6JVW-ZDwh8fR2-r-V5My733VawA-IYhL1xFS_jO1jCtwiT4NMmIqOGskctdUnYN5BlXImZm0YXJiPih0d7RSlqhXPQKfDdA9KdbiWYK27BaMk8ZsujwSaVq3rEeA2u98qQeCutI9DyGrtxf8xqsD5upuptVK04Z3otOTzrJy8B8J3HHAo54axCxs708X3EJPjJHI5cUheOaH6OTHJHciwZGg' http://university:8000/grades/
+[2026-08-17 13:08:26,749 - INFO] - Response status code='200', elapsed_time='0:00:00.008960'
+[
+  {
+    "teacher_id": 1,
+    "student_id": 1,
+    "grade": 3,
+    "id": 1
+  },
+  {
+    "teacher_id": 2,
+    "student_id": 2,
+    "grade": 2,
+    "id": 2
+  },
+  {
+    "teacher_id": 3,
+    "student_id": 3,
+    "grade": 2,
+    "id": 3
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 4,
+    "id": 5
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 4,
+    "id": 6
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 2,
+    "id": 7
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 3,
+    "id": 8
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 1,
+    "id": 9
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 3,
+    "id": 10
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 2,
+    "id": 11
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 3,
+    "id": 12
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 1,
+    "id": 13
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 3,
+    "id": 14
+  },
+  {
+    "teacher_id": 7,
+    "student_id": 6,
+    "grade": 4,
+    "id": 15
+  },
+  {
+    "teacher_id": 7,
+    "student_id": 6,
+    "grade": 4,
+    "id": 16
+  },
+  {
+    "teacher_id": 7,
+    "student_id": 6,
+    "grade": 1,
+    "id": 17
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 2,
+    "id": 18
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 2,
+    "id": 19
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 3,
+    "id": 20
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 2,
+    "id": 21
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 1,
+    "id": 22
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 8,
+    "grade": 1,
+    "id": 23
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 8,
+    "grade": 1,
+    "id": 24
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 8,
+    "grade": 2,
+    "id": 25
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 2,
+    "id": 26
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 4,
+    "id": 27
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 2,
+    "id": 28
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 3,
+    "id": 29
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 4,
+    "id": 30
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 10,
+    "grade": 2,
+    "id": 31
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 10,
+    "grade": 5,
+    "id": 32
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 10,
+    "grade": 2,
+    "id": 33
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 3,
+    "id": 34
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 1,
+    "id": 35
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 1,
+    "id": 36
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 1,
+    "id": 37
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 4,
+    "id": 38
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 12,
+    "grade": 5,
+    "id": 39
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 12,
+    "grade": 1,
+    "id": 40
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 12,
+    "grade": 5,
+    "id": 41
+  },
+  {
+    "teacher_id": 11,
+    "student_id": 11,
+    "grade": 2,
+    "id": 42
+  },
+  {
+    "teacher_id": 11,
+    "student_id": 11,
+    "grade": 3,
+    "id": 43
+  },
+  {
+    "teacher_id": 11,
+    "student_id": 11,
+    "grade": 3,
+    "id": 44
+  }
+]
+

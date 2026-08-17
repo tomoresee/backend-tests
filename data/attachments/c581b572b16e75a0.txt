@@ -1,0 +1,29 @@
+[2026-08-17 13:08:28,314 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 141' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=ubennett&password=QYQqO8QgVC%293BTMAE5cxNiN2hPo7j%26&password_repeat=QYQqO8QgVC%293BTMAE5cxNiN2hPo7j%26&email=samuel75%40example.net' http://auth:8000/auth/register/
+[2026-08-17 13:08:28,315 - INFO] - Response status code='201', elapsed_time='0:00:00.272343'
+{
+  "detail": "User registered"
+}
+
+[2026-08-17 13:08:28,667 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 61' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=ubennett&password=QYQqO8QgVC%293BTMAE5cxNiN2hPo7j%26' http://auth:8000/auth/login/
+[2026-08-17 13:08:28,668 - INFO] - Response status code='200', elapsed_time='0:00:00.311965'
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE0LCJ1c2VybmFtZSI6InViZW5uZXR0IiwiZXhwIjoxNzg2OTc5MzA4LCJpYXQiOjE3ODY5NzIxMDh9.S8RgsR99lRK57arbFw3qhNI7u60pRQDDCPkDNNW8ALaEMt1FgpNhvaDsgbr2p_BdtrQkbfBWadE7pEJLapxNkKm7BuI9FboVOfkz-b7VfGQCUNUDVjPS3oDlqcp3sRnDU93exXkvCGSciOp26AkhBVswLpqJ8KUKJN6lxINavY9-dC73mH6x-tTsFAqDcnQsc3vYZ0chuUL6qHIcHj3q1iGhbrGu79hSRR8hb3oWTQ2XhyvwWKO7TAPpa_9bwb-k1-55uys1IVEs0TzJWSDgdbCmC8PkEqGcbKjkm-bg62seTClA83f7LYh9-AtYnS5N-PI1SE9gfADqxSXdYPz4Bw",
+  "token_type": "Bearer"
+}
+
+[2026-08-17 13:08:28,676 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE0LCJ1c2VybmFtZSI6InViZW5uZXR0IiwiZXhwIjoxNzg2OTc5MzA4LCJpYXQiOjE3ODY5NzIxMDh9.S8RgsR99lRK57arbFw3qhNI7u60pRQDDCPkDNNW8ALaEMt1FgpNhvaDsgbr2p_BdtrQkbfBWadE7pEJLapxNkKm7BuI9FboVOfkz-b7VfGQCUNUDVjPS3oDlqcp3sRnDU93exXkvCGSciOp26AkhBVswLpqJ8KUKJN6lxINavY9-dC73mH6x-tTsFAqDcnQsc3vYZ0chuUL6qHIcHj3q1iGhbrGu79hSRR8hb3oWTQ2XhyvwWKO7TAPpa_9bwb-k1-55uys1IVEs0TzJWSDgdbCmC8PkEqGcbKjkm-bg62seTClA83f7LYh9-AtYnS5N-PI1SE9gfADqxSXdYPz4Bw' 'http://university:8000/grades/stats/?student_id=invalid'
+[2026-08-17 13:08:28,676 - INFO] - Response status code='422', elapsed_time='0:00:00.007016'
+{
+  "detail": [
+    {
+      "type": "int_parsing",
+      "loc": [
+        "query",
+        "student_id"
+      ],
+      "msg": "Input should be a valid integer, unable to parse string as an integer",
+      "input": "invalid"
+    }
+  ]
+}
+
