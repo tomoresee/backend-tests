@@ -1,0 +1,274 @@
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 156' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=desiree29&password=%2BKsQYVTc%291_VNL_ZJQq%5Ee4HmyC%21%40%211&password_repeat=%2BKsQYVTc%291_VNL_ZJQq%5Ee4HmyC%21%40%211&email=ygreen%40example.org' http://auth:8000/auth/register/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.307580'
+{
+  "detail": "User registered"
+}
+
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 70' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=desiree29&password=%2BKsQYVTc%291_VNL_ZJQq%5Ee4HmyC%21%40%211' http://auth:8000/auth/login/
+INFO     Logger:logger.py:32 Response status code='200', elapsed_time='0:00:00.351873'
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6ImRlc2lyZWUyOSIsImV4cCI6MTc4NzI0NTM0OSwiaWF0IjoxNzg3MjM4MTQ5fQ.ZP6dHkoYTOZ5I_YeLlF6fAs5B4EbrZr4_6wGU8XeYUXmqfe23td6dF4ZWLzv8ToPVgeheC-iYNqhixQn-qw5Oy3O8PUHPBL1azAGyF_PG9f5xEYqzY3E5FL2QbEykfXFuzAl87e7AOancAnc7AtNtY3cQ4hyPedD0-yhTGtSVPXj9RFhceVpAPXm21K8cmRP0qfNYFDkXItfc7mJbNnd4RopNfYpPqIp7rYLwKc2fQFkHyhnI_4S9pGIVc96Xa9lkSPP4yeIVWC8SX8Ryh7O7nVQ9AMl8NIWFiISpqGZp6V35ulKXzofENIJ7V8W9Ov5W9kBkv37ZngRcPIUZnZjJw",
+  "token_type": "Bearer"
+}
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6ImRlc2lyZWUyOSIsImV4cCI6MTc4NzI0NTM0OSwiaWF0IjoxNzg3MjM4MTQ5fQ.ZP6dHkoYTOZ5I_YeLlF6fAs5B4EbrZr4_6wGU8XeYUXmqfe23td6dF4ZWLzv8ToPVgeheC-iYNqhixQn-qw5Oy3O8PUHPBL1azAGyF_PG9f5xEYqzY3E5FL2QbEykfXFuzAl87e7AOancAnc7AtNtY3cQ4hyPedD0-yhTGtSVPXj9RFhceVpAPXm21K8cmRP0qfNYFDkXItfc7mJbNnd4RopNfYpPqIp7rYLwKc2fQFkHyhnI_4S9pGIVc96Xa9lkSPP4yeIVWC8SX8Ryh7O7nVQ9AMl8NIWFiISpqGZp6V35ulKXzofENIJ7V8W9Ov5W9kBkv37ZngRcPIUZnZjJw' http://university:8000/grades/
+INFO     Logger:logger.py:32 Response status code='200', elapsed_time='0:00:00.009453'
+[
+  {
+    "teacher_id": 1,
+    "student_id": 1,
+    "grade": 1,
+    "id": 1
+  },
+  {
+    "teacher_id": 2,
+    "student_id": 2,
+    "grade": 4,
+    "id": 2
+  },
+  {
+    "teacher_id": 3,
+    "student_id": 3,
+    "grade": 2,
+    "id": 3
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 2,
+    "id": 5
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 5,
+    "id": 6
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 2,
+    "id": 7
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 1,
+    "id": 8
+  },
+  {
+    "teacher_id": 5,
+    "student_id": 5,
+    "grade": 1,
+    "id": 9
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 3,
+    "id": 10
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 5,
+    "id": 11
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 4,
+    "id": 12
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 4,
+    "id": 13
+  },
+  {
+    "teacher_id": 6,
+    "student_id": 6,
+    "grade": 1,
+    "id": 14
+  },
+  {
+    "teacher_id": 7,
+    "student_id": 6,
+    "grade": 3,
+    "id": 15
+  },
+  {
+    "teacher_id": 7,
+    "student_id": 6,
+    "grade": 3,
+    "id": 16
+  },
+  {
+    "teacher_id": 7,
+    "student_id": 6,
+    "grade": 3,
+    "id": 17
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 4,
+    "id": 18
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 4,
+    "id": 19
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 2,
+    "id": 20
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 5,
+    "id": 21
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 7,
+    "grade": 2,
+    "id": 22
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 8,
+    "grade": 2,
+    "id": 23
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 8,
+    "grade": 3,
+    "id": 24
+  },
+  {
+    "teacher_id": 8,
+    "student_id": 8,
+    "grade": 1,
+    "id": 25
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 1,
+    "id": 26
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 4,
+    "id": 27
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 5,
+    "id": 28
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 4,
+    "id": 29
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 9,
+    "grade": 3,
+    "id": 30
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 10,
+    "grade": 1,
+    "id": 31
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 10,
+    "grade": 5,
+    "id": 32
+  },
+  {
+    "teacher_id": 9,
+    "student_id": 10,
+    "grade": 5,
+    "id": 33
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 5,
+    "id": 34
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 2,
+    "id": 35
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 1,
+    "id": 36
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 4,
+    "id": 37
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 11,
+    "grade": 1,
+    "id": 38
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 12,
+    "grade": 2,
+    "id": 39
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 12,
+    "grade": 3,
+    "id": 40
+  },
+  {
+    "teacher_id": 10,
+    "student_id": 12,
+    "grade": 5,
+    "id": 41
+  },
+  {
+    "teacher_id": 11,
+    "student_id": 11,
+    "grade": 3,
+    "id": 42
+  },
+  {
+    "teacher_id": 11,
+    "student_id": 11,
+    "grade": 5,
+    "id": 43
+  },
+  {
+    "teacher_id": 11,
+    "student_id": 11,
+    "grade": 2,
+    "id": 44
+  }
+]

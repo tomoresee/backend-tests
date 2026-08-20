@@ -1,0 +1,27 @@
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 154' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=emorris&password=%216vHWd%28r%5En5XbFPFx%29WGzbQ08d1%218u&password_repeat=%216vHWd%28r%5En5XbFPFx%29WGzbQ08d1%218u&email=jodyfisher%40example.net' http://auth:8000/auth/register/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.307095'
+{
+  "detail": "User registered"
+}
+
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 66' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=emorris&password=%216vHWd%28r%5En5XbFPFx%29WGzbQ08d1%218u' http://auth:8000/auth/login/
+INFO     Logger:logger.py:32 Response status code='200', elapsed_time='0:00:00.359774'
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJ1c2VybmFtZSI6ImVtb3JyaXMiLCJleHAiOjE3ODcyNDUzNTAsImlhdCI6MTc4NzIzODE1MH0.O0LBOe56t8JzesNSAYtXeY8Il302qHqj1fIKXVnyOePzdPHM3NfFRXdm8RAYJZsFAW_3P149NJEm7FsZvo8x7ekldCGEwsv1PE4dRBqxyPUyS_FIiLj2q4GLi9iaB_c4qEimjJDlVsIGwz8ugXU9S1Iun7CRv-VlHo6HBp4exiO44EofIMzuvTwfIuE7M2X9oqX5UidnE8IBD3kPZYZz7PA7C7YJQSTT4CmFlViHxQ_pwr1hIKB9MukMBxomazwAWp3W6xhXPC600OvSRTkeR6SlmeKMkfJx2KlKgEkFe3ocgV4CVx2-F0EBE1sRxgW0YE_qUFhThpygtFifr976IA",
+  "token_type": "Bearer"
+}
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJ1c2VybmFtZSI6ImVtb3JyaXMiLCJleHAiOjE3ODcyNDUzNTAsImlhdCI6MTc4NzIzODE1MH0.O0LBOe56t8JzesNSAYtXeY8Il302qHqj1fIKXVnyOePzdPHM3NfFRXdm8RAYJZsFAW_3P149NJEm7FsZvo8x7ekldCGEwsv1PE4dRBqxyPUyS_FIiLj2q4GLi9iaB_c4qEimjJDlVsIGwz8ugXU9S1Iun7CRv-VlHo6HBp4exiO44EofIMzuvTwfIuE7M2X9oqX5UidnE8IBD3kPZYZz7PA7C7YJQSTT4CmFlViHxQ_pwr1hIKB9MukMBxomazwAWp3W6xhXPC600OvSRTkeR6SlmeKMkfJx2KlKgEkFe3ocgV4CVx2-F0EBE1sRxgW0YE_qUFhThpygtFifr976IA' 'http://university:8000/grades/?student_id=invalid'
+INFO     Logger:logger.py:32 Response status code='422', elapsed_time='0:00:00.008116'
+{
+  "detail": [
+    {
+      "type": "int_parsing",
+      "loc": [
+        "query",
+        "student_id"
+      ],
+      "msg": "Input should be a valid integer, unable to parse string as an integer",
+      "input": "invalid"
+    }
+  ]
+}
