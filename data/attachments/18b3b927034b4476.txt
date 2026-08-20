@@ -1,0 +1,22 @@
+[2026-08-20 15:39:36,591 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 161' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=shelleychapman&password=tU4%2BX%23TS%23LIbOL3u6UdCTyjtd%283S3%25&password_repeat=tU4%2BX%23TS%23LIbOL3u6UdCTyjtd%283S3%25&email=madeline76%40example.com' http://auth:8000/auth/register/
+[2026-08-20 15:39:36,591 - INFO] - Response status code='201', elapsed_time='0:00:00.271148'
+{
+  "detail": "User registered"
+}
+
+[2026-08-20 15:39:36,919 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 73' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=shelleychapman&password=tU4%2BX%23TS%23LIbOL3u6UdCTyjtd%283S3%25' http://auth:8000/auth/login/
+[2026-08-20 15:39:36,919 - INFO] - Response status code='200', elapsed_time='0:00:00.287498'
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJ1c2VybmFtZSI6InNoZWxsZXljaGFwbWFuIiwiZXhwIjoxNzg3MjQ3NTc2LCJpYXQiOjE3ODcyNDAzNzZ9.MzreF_VIKWX9ojGv9K_dEO9TFqyish9_NEwFrwz6wAsANe3qYUFThjIvK5JgMQ-gJu9rTI9VU_8dWtrkoe81BdHQyk7og-bn_SrCplwnnwM6NPAeA8SN59CWKY2y1chlt4QVYtcf93CXnXI8jJi9iCyGeQKo7U9sLq1xmv9xGUNliFbX2ojmNwALighXgsmlxp8NAnNaDZ7oYqsBYaq8hR1v2e4buax4GTtre-x53AvLOJIL98Q22ZNjS2s9qAhX3EtC-xJebUoJYnWIRfrLQPIz7IebCCK7PJH-ZUQN7jjP0nYH_sxRU53xebQhp3ClFnnDaIHWeyzyb24UDQP3aQ",
+  "token_type": "Bearer"
+}
+
+[2026-08-20 15:39:36,929 - INFO] - Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJ1c2VybmFtZSI6InNoZWxsZXljaGFwbWFuIiwiZXhwIjoxNzg3MjQ3NTc2LCJpYXQiOjE3ODcyNDAzNzZ9.MzreF_VIKWX9ojGv9K_dEO9TFqyish9_NEwFrwz6wAsANe3qYUFThjIvK5JgMQ-gJu9rTI9VU_8dWtrkoe81BdHQyk7og-bn_SrCplwnnwM6NPAeA8SN59CWKY2y1chlt4QVYtcf93CXnXI8jJi9iCyGeQKo7U9sLq1xmv9xGUNliFbX2ojmNwALighXgsmlxp8NAnNaDZ7oYqsBYaq8hR1v2e4buax4GTtre-x53AvLOJIL98Q22ZNjS2s9qAhX3EtC-xJebUoJYnWIRfrLQPIz7IebCCK7PJH-ZUQN7jjP0nYH_sxRU53xebQhp3ClFnnDaIHWeyzyb24UDQP3aQ' http://university:8000/grades/stats/
+[2026-08-20 15:39:36,929 - INFO] - Response status code='200', elapsed_time='0:00:00.008546'
+{
+  "count": 42,
+  "min": 1,
+  "max": 5,
+  "avg": 3.4285714285714284
+}
+
