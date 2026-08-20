@@ -1,0 +1,50 @@
+# Виртуальное окружение
+.venv
+venv
+env
+
+# Файлы IDE и системы
+.idea
+.vscode
+*.iml
+.DS_Store
+__pycache__
+*.pyc
+*.pyo
+
+# Логи и временные файлы
+logs/
+*.log
+allure-results/
+allure-report/
+
+# Git
+.git
+.gitignore
+
+# Файлы окружения
+.env
+.env.*
+!.env.example
+
+# CI/CD
+.github/
+.github/workflows
+
+# Документация
+readme.md
+*.md
+
+# Отчеты и артефакты
+allure-results/
+allure-report/
+
+# Конфиги
+pyproject.toml
+ruff.toml
+ruff.toml
+
+# Docker файлы
+Dockerfile
+docker-compose.yml
+.dockerignore

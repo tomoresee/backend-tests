@@ -1,0 +1,66 @@
+services:
+  postgres_auth:
+    image: postgres:17
+    container_name: postgres-auth
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_AUTH}
+    ports:
+      - "5430:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB_AUTH}" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  postgres_university:
+    image: postgres:17
+    container_name: postgres-university
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_UNIVERSITY}
+    ports:
+      - "5431:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB_UNIVERSITY}" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  auth:
+    image: mekidmetal/auth-service
+    container_name: auth-service
+    environment:
+      UNIVERSITY_SERVICE_INTERNAL_URL: ${UNIVERSITY_SERVICE_INTERNAL_URL}
+      UNIVERSITY_SERVICE_API_URL: ${UNIVERSITY_SERVICE_API_URL}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_AUTH}
+      POSTGRES_HOST: postgres_auth
+      POSTGRES_PORT: 5432
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres_auth:
+        condition: service_healthy
+
+  university:
+    image: mekidmetal/university-service
+    container_name: university-service
+    environment:
+      AUTH_SERVICE_INTERNAL_URL: ${AUTH_SERVICE_INTERNAL_URL}
+      AUTH_SERVICE_API_URL: ${AUTH_SERVICE_API_URL}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_UNIVERSITY}
+      POSTGRES_HOST: postgres_university
+      POSTGRES_PORT: 5432
+    ports:
+      - "8001:8000"
+    depends_on:
+      postgres_university:
+        condition: service_healthy
