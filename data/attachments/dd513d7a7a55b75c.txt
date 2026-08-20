@@ -1,0 +1,139 @@
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 154' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=fowlerjoshua&password=VPpnAPmh%2A3I4GlP%245%2AH4N34jJh%29R5V&password_repeat=VPpnAPmh%2A3I4GlP%245%2AH4N34jJh%29R5V&email=suzanne78%40example.org' http://auth:8000/auth/register/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.218048'
+{
+  "detail": "User registered"
+}
+
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Content-Length: 69' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=fowlerjoshua&password=VPpnAPmh%2A3I4GlP%245%2AH4N34jJh%29R5V' http://auth:8000/auth/login/
+INFO     Logger:logger.py:32 Response status code='200', elapsed_time='0:00:00.244639'
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ",
+  "token_type": "Bearer"
+}
+
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 72' -H 'Content-Type: application/json' -d '{"first_name": "Robert", "last_name": "Vasquez", "subject": "Geography"}' http://university:8000/teachers/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.037960'
+{
+  "first_name": "Robert",
+  "last_name": "Vasquez",
+  "subject": "Geography",
+  "id": 6
+}
+
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 25' -H 'Content-Type: application/json' -d '{"name": "William Silva"}' http://university:8000/groups/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.008406'
+{
+  "name": "William Silva",
+  "id": 6
+}
+
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 140' -H 'Content-Type: application/json' -d '{"first_name": "Erika", "last_name": "Brown", "email": "jgarcia@example.org", "degree": "Doctorate", "phone": "+75683056821", "group_id": 6}' http://university:8000/students/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.009312'
+{
+  "first_name": "Erika",
+  "last_name": "Brown",
+  "email": "jgarcia@example.org",
+  "degree": "Doctorate",
+  "phone": "+75683056821",
+  "group_id": 6,
+  "id": 6
+}
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 33' -H 'Content-Type: application/x-www-form-urlencoded' -d 'teacher_id=6&student_id=6&grade=5' http://university:8000/grades/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.008612'
+{
+  "teacher_id": 6,
+  "student_id": 6,
+  "grade": 5,
+  "id": 10
+}
+
+INFO     Logger:logger.py:32 Создана оценка: 5 (ID: 10)
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 33' -H 'Content-Type: application/x-www-form-urlencoded' -d 'teacher_id=6&student_id=6&grade=4' http://university:8000/grades/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.009575'
+{
+  "teacher_id": 6,
+  "student_id": 6,
+  "grade": 4,
+  "id": 11
+}
+
+INFO     Logger:logger.py:32 Создана оценка: 4 (ID: 11)
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 33' -H 'Content-Type: application/x-www-form-urlencoded' -d 'teacher_id=6&student_id=6&grade=4' http://university:8000/grades/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.008135'
+{
+  "teacher_id": 6,
+  "student_id": 6,
+  "grade": 4,
+  "id": 12
+}
+
+INFO     Logger:logger.py:32 Создана оценка: 4 (ID: 12)
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 33' -H 'Content-Type: application/x-www-form-urlencoded' -d 'teacher_id=6&student_id=6&grade=3' http://university:8000/grades/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.007836'
+{
+  "teacher_id": 6,
+  "student_id": 6,
+  "grade": 3,
+  "id": 13
+}
+
+INFO     Logger:logger.py:32 Создана оценка: 3 (ID: 13)
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 33' -H 'Content-Type: application/x-www-form-urlencoded' -d 'teacher_id=6&student_id=6&grade=3' http://university:8000/grades/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.008305'
+{
+  "teacher_id": 6,
+  "student_id": 6,
+  "grade": 3,
+  "id": 14
+}
+
+INFO     Logger:logger.py:32 Создана оценка: 3 (ID: 14)
+INFO     Logger:logger.py:32 Всего создано 5 оценок
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 75' -H 'Content-Type: application/json' -d '{"first_name": "Jennifer", "last_name": "Carter", "subject": "Mathematics"}' http://university:8000/teachers/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.007452'
+{
+  "first_name": "Jennifer",
+  "last_name": "Carter",
+  "subject": "Mathematics",
+  "id": 7
+}
+
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 33' -H 'Content-Type: application/x-www-form-urlencoded' -d 'teacher_id=7&student_id=6&grade=4' http://university:8000/grades/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.008643'
+{
+  "teacher_id": 7,
+  "student_id": 6,
+  "grade": 4,
+  "id": 15
+}
+
+INFO     Logger:logger.py:32 Создана оценка: 4 (ID: 15)
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 33' -H 'Content-Type: application/x-www-form-urlencoded' -d 'teacher_id=7&student_id=6&grade=4' http://university:8000/grades/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.009029'
+{
+  "teacher_id": 7,
+  "student_id": 6,
+  "grade": 4,
+  "id": 16
+}
+
+INFO     Logger:logger.py:32 Создана оценка: 4 (ID: 16)
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' -H 'Content-Length: 33' -H 'Content-Type: application/x-www-form-urlencoded' -d 'teacher_id=7&student_id=6&grade=5' http://university:8000/grades/
+INFO     Logger:logger.py:32 Response status code='201', elapsed_time='0:00:00.007986'
+{
+  "teacher_id": 7,
+  "student_id": 6,
+  "grade": 5,
+  "id": 17
+}
+
+INFO     Logger:logger.py:32 Создана оценка: 5 (ID: 17)
+INFO     Logger:logger.py:32 Всего создано 3 оценок
+INFO     Logger:logger.py:32 Request: curl -H 'User-Agent: python-requests/2.34.2' -H 'Accept-Encoding: gzip, deflate, zstd' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoiZm93bGVyam9zaHVhIiwiZXhwIjoxNzg3MjQ2MTA5LCJpYXQiOjE3ODcyMzg5MDl9.QKgdV33ioQ_owE5bvV9Kb8LN9goJSbhoTqekvTYUFixOpMXo-3KRDg8xIcVPWWkN2z6JKNuIoAcvMZ5uaMRSAtVNEUuUYzhn-LztcpNou-D514ZdbpB_poD7ciN6wHd8sKCpi_NShqoEr-2jNHcCXONHgie6uFJ86VXaqp3m1-v8w8ppmAdQbzAvp1JL2DdBcOcxYkoR60TLu9iUZScBQLSVyWouE2Tchpvrrka3w4bqsdFBcsvjMTzTCxKLqMnwIeWL20WdsNdDEAX4z9zSM5MXY7RYIhvsWHrRiTMkIGA22rKVt7Qhl_q09obzbsWL6kmPsClzIYsOlOu52qLtlQ' 'http://university:8000/grades/stats/?teacher_id=6'
+INFO     Logger:logger.py:32 Response status code='200', elapsed_time='0:00:00.007019'
+{
+  "count": 5,
+  "min": 3,
+  "max": 5,
+  "avg": 3.8
+}
