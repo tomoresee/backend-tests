@@ -16,8 +16,8 @@ RUN wget https://github.com/allure-framework/allure2/releases/download/2.29.0/al
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
-
 RUN mkdir -p /app/allure-results /app/allure-report
+
+COPY . .
 
 CMD ["pytest", "tests/", "--alluredir=/app/allure-results"]
