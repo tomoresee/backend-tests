@@ -13,9 +13,10 @@ RUN wget https://github.com/allure-framework/allure2/releases/download/2.29.0/al
     && rm allure-2.29.0.zip \
     && ln -s /opt/allure-2.29.0/bin/allure /usr/local/bin/allure
 
-COPY . .
-
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
 
 RUN mkdir -p /app/allure-results /app/allure-report
 
